@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Dummy content. -->
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginTop="1dp"  >
+
+        <ImageButton
+         	android:id="@+id/imageView1"
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_alignParentTop="true"
+         	android:layout_centerHorizontal="true"
+         	android:layout_centerInParent="false"
+         	android:layout_marginTop="1dp" />
+        
+        <TextView android:id="@android:id/text1"
+            style="?android:textAppearanceLarge"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_below="@+id/imageView1"
+         	android:layout_centerHorizontal="true"
+         	android:layout_marginTop="5dp"
+         	android:gravity="center|center_horizontal"/>
+        
+        <TextView android:id="@android:id/text2" 
+            style="?android:textAppearanceMedium"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_alignLeft="@+id/imageView1"
+         	android:layout_below="@android:id/text1"
+         	android:layout_marginTop="5dp"
+         	android:enabled="false"
+         	android:includeFontPadding="false"
+         	android:scrollHorizontally="false"
+         	android:width="320dp" 
+         	android:textColor="#5A5A5A" />
+        
+        <Button
+         	android:id="@+id/button1"
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_alignRight="@android:id/text2"
+         	android:layout_below="@android:id/text2"
+         	android:layout_marginRight="5dp"
+         	android:layout_marginTop="15dp"
+         	android:background="@android:drawable/btn_default"
+         	android:text="Saw it!"
+         	android:width="120dp" /> 
+         	
+
+    </RelativeLayout>
+    
+    <!-- This initially-hidden ImageView will hold the expanded/zoomed version of the
+         images above. Without transformations applied, it takes up the entire screen.
+         To achieve the "zoom" animation, this view's bounds are animated from the
+         bounds of the thumbnail buttons above, to its final laid-out bounds. The implementation
+         of this animation is in the ZoomActivity class. -->
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
+
+</FrameLayout>

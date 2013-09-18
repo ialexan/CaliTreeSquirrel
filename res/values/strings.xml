@@ -1,0 +1,30 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">Cali Tree Squirrel</string>
+    <string name="menu_settings">Information</string>
+    
+    
+    <string name="title_template_step"></string>
+    <string name="action_previous">Previous</string>
+    <string name="action_next">Next</string>
+    <string name="action_finish">Finish</string>
+    
+    
+    <string name="name1">Western Gray Squirrel</string>
+    <string name="desciption1">Native Species - White fur on the abdomen, gray fur on sides and back, tail very bushy with white-tipped hairs.</string>
+    
+    <string name="name2">Douglas Squirrel</string>
+    <string name="desciption2">Native Species - Fur on abdomen is light to dark orange, grayish-brown fur on sides and back, found in coniferous (pine) forests.</string>
+    
+    <string name="name3">Eastern Gray Squirrel</string>
+    <string name="desciption3">Introduced Species - White fur on the abdomen, light gray to rust colored fur on the sides and back, tail is light gray with rust coloration and hairs have white tips.</string>
+    
+    <string name="name4">Eastern Fox Squirrel</string>
+    <string name="desciption4">Introduced Species - Orange to rust colored fur on abdomen, reddish-brown colored fur on sides, back, and tail.</string>
+    
+    <string name="name5">Melanistic Squirrel</string>
+    <string name="desciption5">Introduced Species - Black fur all over the animal.  The melanistic color variant is present in populations of both the Eastern Gray Squirrel and the Eastern Fox Squirrel.</string>
+    
+    <string name="sendURL">http://cs3.calstatela.edu:4042/calitreesquirrel/send</string>
+    
+</resources>
