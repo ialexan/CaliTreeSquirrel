@@ -3,38 +3,27 @@ package com.alexandev.calitreesquirrel;
 
 public class ServiceResponse {
 
-    boolean success;
+//    boolean success;
 
-    String message;
+    Long id;
 
     public ServiceResponse()
     {
     }
 
-    public ServiceResponse( boolean success, String message )
+    public ServiceResponse( Long id )
     {
-        this.success = success;
-        this.message = message;
+        this.id = id;
     }
 
-    public boolean isSuccess()
+    public Long getId()
     {
-        return success;
+        return id;
     }
 
-    public void setSuccess( boolean success )
+    public void setId( Long id )
     {
-        this.success = success;
-    }
-
-    public String getMessage()
-    {
-        return message;
-    }
-
-    public void setMessage( String message )
-    {
-        this.message = message;
+        this.id = id;
     }
 
 }

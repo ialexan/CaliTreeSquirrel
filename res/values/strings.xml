@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">Cali Tree Squirrel</string>
-    <string name="menu_settings">Information</string>
+    <string name="sawIt">Saw It!</string> 
+    <string name="description">Squirrel</string>
     
-    
-    <string name="title_template_step"></string>
     <string name="action_previous">Previous</string>
     <string name="action_next">Next</string>
     <string name="action_finish">Finish</string>
@@ -25,6 +26,6 @@
     <string name="name5">Melanistic Squirrel</string>
     <string name="desciption5">Introduced Species - Black fur all over the animal.  The melanistic color variant is present in populations of both the Eastern Gray Squirrel and the Eastern Fox Squirrel.</string>
     
-    <string name="sendURL">http://cs3.calstatela.edu:4042/calitreesquirrel/send</string>
+    <string name="sendURL">http://cs3.calstatela.edu:4042/squirrels/sending</string>
     
 </resources>

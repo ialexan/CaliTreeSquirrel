@@ -9,6 +9,11 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 import android.util.Log;
 
@@ -22,9 +27,13 @@ public class HttpRemoteConnection {
     {
     }
     
-    public InputStream getStreamFromUrl( String url, List<NameValuePair> params )
+    public JSONObject getStreamFromUrl( String url, List<NameValuePair> params )
     {// Making HTTP request
-        try
+        
+    	JSONObject jObj = null;
+        String json = "";
+    	
+    	try
         {
             HttpPost httpPost = new HttpPost( url );
 
@@ -34,6 +43,31 @@ public class HttpRemoteConnection {
             HttpResponse httpResponse = httpClient.execute( httpPost );
             HttpEntity httpEntity = httpResponse.getEntity();
             inputStream = httpEntity.getContent();
+            
+            
+            
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                		inputStream, "iso-8859-1"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                inputStream.close();
+                json = sb.toString();
+            } catch (Exception e) {
+                Log.e("Buffer Error", "Error converting result " + e.toString());
+            }
+     
+            // try parse the string to a JSON object
+            try {
+                jObj = new JSONObject(json);
+            } catch (JSONException e) {
+                Log.e("JSON Parser", "Error parsing data " + e.toString());
+            }
+            
+            
         }
         catch( Exception e )
         {
@@ -41,7 +75,7 @@ public class HttpRemoteConnection {
         }
 
         // return Input Stream
-        return inputStream;
+        return jObj;
     }
 
 }
