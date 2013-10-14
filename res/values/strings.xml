@@ -32,7 +32,7 @@
     <string name="button_register">Register</string>
     <string name="button_login">Login</string>
     <string name="textview_email">Email </string>
-    <string name="action_signout">SignOut</string>
+    <string name="action_signout">Sign Out</string>
     <string name="action_info">Info</string>
     <string name="textview_firstname">First Name </string>
     <string name="textview_lastname">Last Name </string>
