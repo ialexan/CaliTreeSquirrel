@@ -36,5 +36,7 @@
     <string name="action_info">Info</string>
     <string name="textview_firstname">First Name </string>
     <string name="textview_lastname">Last Name </string>
+    <string name="textview_username">Username </string>
+    
 
 </resources>
