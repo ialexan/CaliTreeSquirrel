@@ -1,4 +1,4 @@
-package com.alexandev.calitreesquirrel;
+package com.alexandev.calitreesquirrel.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

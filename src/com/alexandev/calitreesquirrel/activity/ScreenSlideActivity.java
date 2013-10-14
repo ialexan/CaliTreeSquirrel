@@ -1,9 +1,14 @@
 /* 
  * Ishag Alexnaian */
 
-package com.alexandev.calitreesquirrel;
+package com.alexandev.calitreesquirrel.activity;
 
 import com.alexandev.calitreesquirrel.R;
+import com.alexandev.calitreesquirrel.R.id;
+import com.alexandev.calitreesquirrel.R.layout;
+import com.alexandev.calitreesquirrel.R.menu;
+import com.alexandev.calitreesquirrel.R.string;
+import com.alexandev.calitreesquirrel.fragment.ScreenSlidePageFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -15,7 +20,6 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 public class ScreenSlideActivity extends FragmentActivity  {
 
@@ -43,11 +47,12 @@ public class ScreenSlideActivity extends FragmentActivity  {
         
 //        if ( PreferencesCheck.isFirst(this) ){
 //        	Toast.makeText( getApplicationContext(),"First Time user!!!", Toast.LENGTH_LONG ).show();
+//        	Intent intent = new Intent(this, CoverPageActivity.class);
+//            startActivity(intent);
 //        }
-//      
+      
 //        PreferencesCheck.resetFirstTime(this);
-        Intent intent = new Intent(this, CoverPageActivity.class);
-        startActivity(intent);
+        
 
         
         
@@ -104,8 +109,16 @@ public class ScreenSlideActivity extends FragmentActivity  {
                 // Advance to the next step in the wizard. If there is no next step, setCurrentItem
                 // will do nothing.
                 mPager.setCurrentItem(mPager.getCurrentItem() + 1);
-                
                 return true;
+           
+            case R.id.action_info:    	
+            	startActivity( new Intent( this, CoverPageActivity.class ) );
+                return true;     
+                   
+            case R.id.action_signout:    	
+            	startActivity( new Intent( this, LoginActivity.class ) );
+                return true;     
+        
         }
 
         return super.onOptionsItemSelected(item);

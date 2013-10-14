@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">Cali Tree Squirrel</string>
-    <string name="sawIt">Saw It!</string> 
+    <string name="app_name">Cali Squirrels</string>
+    <string name="sawIt">Saw It!</string>
     <string name="description">Squirrel</string>
-
-    <string name="action_previous">Previous</string>
+    <string name="action_previous">Prev</string>
     <string name="action_next">Next</string>
     <string name="action_finish">Finish</string>
     <string name="name1">Western Gray Squirrel</string>
@@ -29,12 +27,14 @@
     <string name="first_page_5">For example, the introduced eastern fox squirrel has replaced the native western gray squirrel in many locations within California, Oregon, and Washington states. And, the eastern fox squirrel is rapidly expanding its geographic range within California. The eastern gray squirrel is ranked among the 100 worst invasive species in the Global Invasive Species Database.</string>
     <string name="first_page_6">Use this application to report which species you are observing and you will be contributing information to a real and important scientific research project.</string>
     <string name="start">Start</string>
-    
     <string name="textview_password">Password </string>
     <string name="button_registeration">Don\'t have an account? Please register. It\'s Free!</string>
     <string name="button_register">Register</string>
     <string name="button_login">Login</string>
     <string name="textview_email">Email </string>
-
+    <string name="action_signout">SignOut</string>
+    <string name="action_info">Info</string>
+    <string name="textview_firstname">First Name </string>
+    <string name="textview_lastname">Last Name </string>
 
 </resources>

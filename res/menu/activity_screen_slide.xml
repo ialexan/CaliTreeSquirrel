@@ -5,6 +5,15 @@
     <!-- Adds an item to the list. -->
     <item android:id="@+id/action_previous"
         android:title="@string/action_previous"
-        android:showAsAction="ifRoom|withText" />
-
+        android:showAsAction="ifRoom|withText" />  
+    <item
+        android:id="@+id/action_info"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_info"/>      
+    <item
+        android:id="@+id/action_signout"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_signout"/>
 </menu>

@@ -1,4 +1,7 @@
-package com.alexandev.calitreesquirrel;
+package com.alexandev.calitreesquirrel.activity;
+
+import com.alexandev.calitreesquirrel.R;
+import com.alexandev.calitreesquirrel.R.layout;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -14,12 +17,12 @@ public class CoverPageActivity extends Activity {
 		setContentView(R.layout.activity_cover_page);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.cover_page, menu);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.cover_page, menu);
+//		return true;
+//	}
 	
     // Called when the user clicks the Register 
     public void sendToLoginPage( View view )
