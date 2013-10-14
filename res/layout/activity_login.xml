@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".LoginActivity" >
+
+    <EditText
+        android:id="@+id/TextEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:background="@android:drawable/editbox_background"
+        android:hint="@string/textview_email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/TextPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TextEmail"
+        android:layout_marginTop="5dip"
+        android:background="@android:drawable/editbox_background"
+        android:hint="@string/textview_password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TextPassword"
+        android:layout_marginTop="20dip"
+        android:onClick="checkLogin"
+        android:text="@string/button_login" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dip"
+        android:onClick="sendToRegister"
+        android:text="@string/button_registeration"
+        android:textSize="12sp" />
+
+</RelativeLayout>
+

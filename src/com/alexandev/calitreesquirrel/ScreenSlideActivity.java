@@ -12,8 +12,10 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class ScreenSlideActivity extends FragmentActivity  {
 
@@ -38,6 +40,16 @@ public class ScreenSlideActivity extends FragmentActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_slide);
+        
+//        if ( PreferencesCheck.isFirst(this) ){
+//        	Toast.makeText( getApplicationContext(),"First Time user!!!", Toast.LENGTH_LONG ).show();
+//        }
+//      
+//        PreferencesCheck.resetFirstTime(this);
+        Intent intent = new Intent(this, CoverPageActivity.class);
+        startActivity(intent);
+
+        
         
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);

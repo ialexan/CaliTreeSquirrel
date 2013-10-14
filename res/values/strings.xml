@@ -5,27 +5,36 @@
     <string name="app_name">Cali Tree Squirrel</string>
     <string name="sawIt">Saw It!</string> 
     <string name="description">Squirrel</string>
-    
+
     <string name="action_previous">Previous</string>
     <string name="action_next">Next</string>
     <string name="action_finish">Finish</string>
-    
-    
     <string name="name1">Western Gray Squirrel</string>
     <string name="desciption1">Native Species - White fur on the abdomen, gray fur on sides and back, tail very bushy with white-tipped hairs.</string>
-    
     <string name="name2">Douglas Squirrel</string>
     <string name="desciption2">Native Species - Fur on abdomen is light to dark orange, grayish-brown fur on sides and back, found in coniferous (pine) forests.</string>
-    
     <string name="name3">Eastern Gray Squirrel</string>
     <string name="desciption3">Introduced Species - White fur on the abdomen, light gray to rust colored fur on the sides and back, tail is light gray with rust coloration and hairs have white tips.</string>
-    
     <string name="name4">Eastern Fox Squirrel</string>
     <string name="desciption4">Introduced Species - Orange to rust colored fur on abdomen, reddish-brown colored fur on sides, back, and tail.</string>
-    
     <string name="name5">Melanistic Squirrel</string>
     <string name="desciption5">Introduced Species - Black fur all over the animal.  The melanistic color variant is present in populations of both the Eastern Gray Squirrel and the Eastern Fox Squirrel.</string>
+    <string name="sendURL">http://cs3.calstatela.edu:4042/squirrels/service/siting/submit</string>
+    <string name="action_settings">Settings</string>
+    <string name="first_page">California Tree Squirrel Application</string>
+    <string name="first_page_1">There are 4 species of tree squirrels currently living in California that are active during the day and therefore are likely to be observed by people.</string>
+    <string name="first_page_2">Two of the 4 species are native to California while the other 2 species have been introduced to various parts of the state over the past 130 years.</string>
+    <string name="first_page_3">By using this application you can participate in a real scientific research project that will map the current distribution of the 4 species throughout California and determine where an introduced species may have a negative impact on a native species.</string>
+    <string name="first_page_4">An introduced species can interact with a native species in ways that are detrimental to the native species.</string>
+    <string name="first_page_5">For example, the introduced eastern fox squirrel has replaced the native western gray squirrel in many locations within California, Oregon, and Washington states. And, the eastern fox squirrel is rapidly expanding its geographic range within California. The eastern gray squirrel is ranked among the 100 worst invasive species in the Global Invasive Species Database.</string>
+    <string name="first_page_6">Use this application to report which species you are observing and you will be contributing information to a real and important scientific research project.</string>
+    <string name="start">Start</string>
     
-    <string name="sendURL">http://cs3.calstatela.edu:4042/squirrels/sending</string>
-    
+    <string name="textview_password">Password </string>
+    <string name="button_registeration">Don\'t have an account? Please register. It\'s Free!</string>
+    <string name="button_register">Register</string>
+    <string name="button_login">Login</string>
+    <string name="textview_email">Email </string>
+
+
 </resources>

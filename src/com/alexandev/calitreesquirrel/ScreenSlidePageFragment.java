@@ -78,6 +78,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		mPageNumber = getArguments().getInt(ARG_PAGE);
 	}
 
@@ -86,6 +87,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 			Bundle savedInstanceState) {
 
 		final ViewGroup rootView;
+
 
 
 		if( getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT )
@@ -226,7 +228,8 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 		else if ( squirrelName == getString(R.string.name4))
 			species = 4;
 		else if ( squirrelName == getString(R.string.name5))
-			species = 4;
+			species = 5;
+
 
 		SubmitTask submitTask = new SubmitTask();
 		submitTask.execute( timestamp, latitude.toString(), longitude.toString(), species+"", this.getActivity().getString( R.string.sendURL ) );
