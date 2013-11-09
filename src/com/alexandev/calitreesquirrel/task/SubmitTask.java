@@ -8,7 +8,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.alexandev.calitreesquirrel.util.HttpRemoteConnection;
 
 import android.app.Activity;
 import android.os.AsyncTask;

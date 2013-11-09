@@ -3,15 +3,11 @@
 
 package com.alexandev.calitreesquirrel.fragment;
 
-import java.sql.Timestamp;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.alexandev.calitreesquirrel.R;
-import com.alexandev.calitreesquirrel.R.drawable;
-import com.alexandev.calitreesquirrel.R.id;
-import com.alexandev.calitreesquirrel.R.layout;
-import com.alexandev.calitreesquirrel.R.string;
 import com.alexandev.calitreesquirrel.task.SubmitTask;
 
 import android.animation.Animator;

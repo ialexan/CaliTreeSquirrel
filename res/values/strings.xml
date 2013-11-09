@@ -17,7 +17,6 @@
     <string name="desciption4">Introduced Species - Orange to rust colored fur on abdomen, reddish-brown colored fur on sides, back, and tail.</string>
     <string name="name5">Melanistic Squirrel</string>
     <string name="desciption5">Introduced Species - Black fur all over the animal.  The melanistic color variant is present in populations of both the Eastern Gray Squirrel and the Eastern Fox Squirrel.</string>
-    <string name="sendURL">http://cs3.calstatela.edu:4042/squirrels/service/siting/submit</string>
     <string name="action_settings">Settings</string>
     <string name="first_page">California Tree Squirrel Application</string>
     <string name="first_page_1">There are 4 species of tree squirrels currently living in California that are active during the day and therefore are likely to be observed by people.</string>
@@ -38,5 +37,8 @@
     <string name="textview_lastname">Last Name </string>
     <string name="textview_username">Username </string>
     
+    <string name="sendURL">http://cs3.calstatela.edu:4042/squirrels/service/siting/submit</string>
+    <string name="loginURL">http://cs3.calstatela.edu:4042/squirrels/j_spring_security_check</string>
+    <string name="registerURL">http://cs3.calstatela.edu:4042/squirrels/service/user/register</string>
 
 </resources>

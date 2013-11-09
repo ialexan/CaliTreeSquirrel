@@ -9,6 +9,7 @@ public class PreferencesCheck {
 
 	public static boolean isFirst(Context context){
 		final SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE); 
+		
 		final boolean first = reader.getBoolean("isFirst", true);
 		if(first){
 			final SharedPreferences.Editor editor = reader.edit();
@@ -24,11 +25,11 @@ public class PreferencesCheck {
 		final SharedPreferences.Editor editor = reader.edit();
 		editor.putBoolean("isFirst", true); 
 		editor.commit();
-
 	}
 	
 	public static boolean isLoggedIn(Context context){
 		final SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE); 
+		
 		final boolean loggedIn = reader.getBoolean("isLoggedIn", false);
 		return loggedIn;
 	}

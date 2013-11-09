@@ -72,7 +72,7 @@
         android:layout_below="@id/password_input"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dip"
-        android:onClick="checkLogin"
+        android:onClick="registerUser"
         android:text="@string/button_register"
         android:textSize="18sp" />
 
