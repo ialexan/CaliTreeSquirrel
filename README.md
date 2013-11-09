@@ -8,8 +8,5 @@ Dependencies
 
 Android-support-v13.jar
 
-jackson-core-2.0.6.jar
-
-jackson-datbind-2.0.6.jar
 
 
