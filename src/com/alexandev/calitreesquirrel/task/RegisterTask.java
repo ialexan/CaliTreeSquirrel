@@ -34,19 +34,22 @@ public class RegisterTask extends AsyncTask<String, String, String> {
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
 			// Change password to MD5 encryption
-            MD5 md5Password = new MD5( params[1] );
-			
-			parameters.add( new BasicNameValuePair( "j_username", params[0] ) );
-			parameters.add( new BasicNameValuePair( "j_password", params[1] ) );
-			parameters.add( new BasicNameValuePair( "mobile", "mobile" ));
+			MD5 md5Password = new MD5( params[1] );
+
+			parameters.add( new BasicNameValuePair( "email", params[4] ) );
+			parameters.add( new BasicNameValuePair( "password", md5Password.getEncryptedValue() ) );
+			parameters.add( new BasicNameValuePair( "lastName", params[3] ) );
+			parameters.add( new BasicNameValuePair( "firstName", params[2] ) );
+			parameters.add( new BasicNameValuePair( "username", params[0] ) );
 
 			HttpRemoteConnection con = new HttpRemoteConnection(); 
-			JSONObject json = con.getStreamFromUrl( params[2],parameters );
+			JSONObject json = con.getStreamFromUrl( params[5], parameters );
 
-			String message = (String) json.get("message");
+//			Log.e( "log_tag", "This is the password -" + md5Password.getEncryptedValue()+ "- this is it.");
+//			Log.e( "log_tag", "This is the url -" + params[5] + "- this is it.");
+//			Log.e( "log_tag", "This is parameters -username-" + params[0] + " -password- " + params[1] + " - " + params[2] + " - " + params[3] + " - " + params[4] + "- this is it.");
 
-			//			Log.e( "log_tag", "This is parameters --" + params[0] + " - " + params[1] + " - " + params[2] + "- this is it.");
-			//			Log.e( "log_tag", "This is the json -" + message + "- this is it.");
+			String message = (String) json.get("user");
 
 			return message;
 
@@ -61,10 +64,8 @@ public class RegisterTask extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPostExecute( String str ) {
 
-		//		Log.e( "log_tag", "This is str -" + str + "- this is it.");
-
-		if ( str.equals("loggedIn")) {
-			Toast.makeText( currentActivity.getApplicationContext(), "Your Logged In", Toast.LENGTH_LONG ).show(); 
+		if ( str.equals("user registered")) {
+			Toast.makeText( currentActivity.getApplicationContext(), "Congratulations you are registered", Toast.LENGTH_LONG ).show(); 
 
 			// Here you need to check preferences if it's a First Time user then you have to send it to instructions page
 
@@ -73,7 +74,7 @@ public class RegisterTask extends AsyncTask<String, String, String> {
 			currentActivity.startActivity( intent );
 		}
 		else  
-			Toast.makeText( currentActivity.getApplicationContext(), "Username or Password invalid", Toast.LENGTH_SHORT ).show();
+			Toast.makeText( currentActivity.getApplicationContext(), "Invalid Entry!", Toast.LENGTH_SHORT ).show();
 
 	}
 

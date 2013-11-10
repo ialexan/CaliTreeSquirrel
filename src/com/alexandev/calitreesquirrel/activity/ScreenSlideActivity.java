@@ -49,11 +49,11 @@ public class ScreenSlideActivity extends FragmentActivity  {
 			startActivity(intent);
 		}
 		
-		if ( PreferencesCheck.isLoggedIn(this) ){
-			Toast.makeText( getApplicationContext(),"Not Logged in", Toast.LENGTH_LONG ).show();
-			Intent intent = new Intent( this, LoginActivity.class );
-			startActivity(intent);
-		}
+//		if ( PreferencesCheck.isLoggedIn(this) ){
+//			Toast.makeText( getApplicationContext(),"Not Logged in", Toast.LENGTH_LONG ).show();
+//			Intent intent = new Intent( this, LoginActivity.class );
+//			startActivity(intent);
+//		}
 
 //		PreferencesCheck.resetFirstTime(this);
 
@@ -147,4 +147,21 @@ public class ScreenSlideActivity extends FragmentActivity  {
 			return NUM_PAGES;
 		}
 	}
+	
+	
+//		@Override
+//		protected void onResume(){
+//			
+//			if ( PreferencesCheck.isFirst(this) ){
+//				Toast.makeText( getApplicationContext(),"First Time user!!!", Toast.LENGTH_LONG ).show();
+//				Intent intent = new Intent(this, CoverPageActivity.class);
+//				startActivity(intent);
+//			}
+//			
+//			if ( PreferencesCheck.isLoggedIn(this) ){
+//				Toast.makeText( getApplicationContext(),"Not Logged in", Toast.LENGTH_LONG ).show();
+//				Intent intent = new Intent( this, LoginActivity.class );
+//				startActivity(intent);
+//			}
+//		}
 }

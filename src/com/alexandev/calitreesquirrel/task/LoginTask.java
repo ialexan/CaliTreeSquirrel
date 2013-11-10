@@ -12,9 +12,9 @@ import com.alexandev.calitreesquirrel.activity.ScreenSlideActivity;
 import com.alexandev.calitreesquirrel.util.PreferencesCheck;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 
@@ -69,7 +69,7 @@ public class LoginTask extends AsyncTask<String, String, String> {
 			
 			// Here you need to check preferences if it's a First Time user then you have to send it to instructions page
 			
-			PreferencesCheck.setLoggedIn( currentActivity, true );
+			PreferencesCheck.setLoggedIn( currentActivity , true );
 			Intent intent = new Intent( currentActivity, ScreenSlideActivity.class );
 			currentActivity.startActivity( intent );
 		}
