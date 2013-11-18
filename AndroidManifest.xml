@@ -8,12 +8,12 @@
         android:minSdkVersion="15"
         android:targetSdkVersion="17" />
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.INTERNET" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-feature android:name="android.hardware.camera" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/sicon"
@@ -38,6 +38,10 @@
         </activity>
         <activity
             android:name="com.alexandev.calitreesquirrel.activity.RegisterActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.alexandev.calitreesquirrel.activity.PhotoIntentActivity"
             android:label="@string/app_name" >
         </activity>
     </application>

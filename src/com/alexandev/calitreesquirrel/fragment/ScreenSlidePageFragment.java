@@ -1,5 +1,4 @@
-/* 
- * Ishag Alexnaian */
+// Ishag Alexnaian
 
 package com.alexandev.calitreesquirrel.fragment;
 
@@ -8,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.alexandev.calitreesquirrel.R;
+import com.alexandev.calitreesquirrel.activity.PhotoIntentActivity;
+import com.alexandev.calitreesquirrel.activity.RegisterActivity;
 import com.alexandev.calitreesquirrel.task.SubmitTask;
 
 import android.animation.Animator;
@@ -16,6 +17,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -217,7 +219,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 
 	// Sending the location coordinates, timestamp and squirrel type to the server
 	public void sendToServer(String timestamp, Double latitude, Double longitude, String squirrelName){
-
+		
 		int species = 0;
 
 		if ( squirrelName == getString(R.string.name1))
@@ -230,10 +232,21 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 			species = 4;
 		else if ( squirrelName == getString(R.string.name5))
 			species = 5;
+		
+		
+		Intent intent = new Intent( this.getActivity() , PhotoIntentActivity.class );
+		
+		Bundle mBundle = new Bundle();
+		mBundle.putString("timestamp", timestamp);
+		mBundle.putString( "latitude", latitude.toString());
+		mBundle.putString( "longitude", longitude.toString());
+		mBundle.putInt( "species", species);
+		intent.putExtras(mBundle);
+		
+		startActivity( intent );
 
-
-		SubmitTask submitTask = new SubmitTask();
-		submitTask.execute( timestamp, latitude.toString(), longitude.toString(), species+"", this.getActivity().getString( R.string.sendURL ) );
+//		SubmitTask submitTask = new SubmitTask();
+//		submitTask.execute( timestamp, latitude.toString(), longitude.toString(), species+"", this.getActivity().getString( R.string.sendURL ) );
 	
 	}
 

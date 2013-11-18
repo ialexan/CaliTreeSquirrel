@@ -1,7 +1,5 @@
 package com.alexandev.calitreesquirrel.util;
 
-import com.alexandev.calitreesquirrel.activity.ScreenSlideActivity;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 

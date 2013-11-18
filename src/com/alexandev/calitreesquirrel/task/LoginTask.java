@@ -12,7 +12,6 @@ import com.alexandev.calitreesquirrel.activity.ScreenSlideActivity;
 import com.alexandev.calitreesquirrel.util.PreferencesCheck;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;

@@ -40,5 +40,11 @@
     <string name="sendURL">http://cs3.calstatela.edu:4042/squirrels/service/siting/submit</string>
     <string name="loginURL">http://cs3.calstatela.edu:4042/squirrels/j_spring_security_check</string>
     <string name="registerURL">http://cs3.calstatela.edu:4042/squirrels/service/user/register</string>
+    <string name="sendWithPhotURL">http://cs3.calstatela.edu:4042/squirrels/service/siting/submitphoto</string>
+    
+    <string name="photo_album_name">Squirrels</string>
+    <string name="cannot">Cannot</string>
+    <string name="btnIntend">Snap a Picture</string>
+    <string name="btnSend">Send it!</string>
     
 </resources>

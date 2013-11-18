@@ -1,5 +1,4 @@
-/* 
- * Ishag Alexnaian */
+// Ishag Alexnaian
 
 package com.alexandev.calitreesquirrel.activity;
 
@@ -20,21 +19,15 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class ScreenSlideActivity extends FragmentActivity  {
-
-	/**
-	 * The number of pages (wizard steps) to show in this demo.
-	 */
+	
+	// The number of pages (wizard steps) to show in this demo.
 	private static final int NUM_PAGES = 5;
 
-	/**
-	 * The pager widget, which handles animation and allows swiping horizontally to access previous
-	 * and next wizard steps.
-	 */
+	//The pager widget, which handles animation and allows swiping horizontally to access previous
+	//and next wizard steps.
 	private ViewPager mPager;
 
-	/**
-	 * The pager adapter, which provides the pages to the view pager widget.
-	 */
+	//The pager adapter, which provides the pages to the view pager widget.
 	private PagerAdapter mPagerAdapter;
 
 
@@ -127,11 +120,7 @@ public class ScreenSlideActivity extends FragmentActivity  {
 	}
 
 
-
-	/**
-	 * A simple pager adapter that represents 5 {@link ScreenSlidePageFragment} objects, in
-	 * sequence.
-	 */
+	//A simple pager adapter that represents 5 {@link ScreenSlidePageFragment} objects, in sequence.
 	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
 		public ScreenSlidePagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -147,21 +136,5 @@ public class ScreenSlideActivity extends FragmentActivity  {
 			return NUM_PAGES;
 		}
 	}
-	
-	
-//		@Override
-//		protected void onResume(){
-//			
-//			if ( PreferencesCheck.isFirst(this) ){
-//				Toast.makeText( getApplicationContext(),"First Time user!!!", Toast.LENGTH_LONG ).show();
-//				Intent intent = new Intent(this, CoverPageActivity.class);
-//				startActivity(intent);
-//			}
-//			
-//			if ( PreferencesCheck.isLoggedIn(this) ){
-//				Toast.makeText( getApplicationContext(),"Not Logged in", Toast.LENGTH_LONG ).show();
-//				Intent intent = new Intent( this, LoginActivity.class );
-//				startActivity(intent);
-//			}
-//		}
+
 }
