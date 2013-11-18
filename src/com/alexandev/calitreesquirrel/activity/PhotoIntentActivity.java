@@ -7,7 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -22,6 +26,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.task.SubmitPhotoTask;
@@ -45,6 +50,9 @@ public class PhotoIntentActivity extends Activity {
 	
 	private Boolean takePhoto = false;
     private String imageName = "Nothing";
+    
+    private static final int DIALOG_ALERT = 10;
+    private Activity currentActivity;
 	
 	/* Photo album for this application */
 	private String getAlbumName() {
@@ -210,7 +218,52 @@ public class PhotoIntentActivity extends Activity {
 		} else {
 			mAlbumStorageDirFactory = new BaseAlbumDirFactory();
 		}
+		
+		currentActivity = this;
+		showDialog(DIALOG_ALERT);
+		
 	}
+	
+	protected Dialog onCreateDialog(int id) {
+	    switch (id) {
+	    case DIALOG_ALERT:
+	      // create out AlterDialog
+	      Builder builder = new AlertDialog.Builder(this);
+	      builder.setMessage("Do you want to take a picture");
+	      builder.setCancelable(true);
+	      builder.setNegativeButton("No, Just Send", new NoPicClickListener());
+	      builder.setPositiveButton("Yes, Snap a Pic", new SnapPicClickListener());
+	      AlertDialog dialog = builder.create();
+	      dialog.show();
+	    }
+	    return super.onCreateDialog(id);
+	  }
+	
+	
+	private final class SnapPicClickListener implements
+			DialogInterface.OnClickListener {
+		public void onClick(DialogInterface dialog, int which) {
+			// Forward to Camera
+			dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
+		}
+	}
+	
+	private final class NoPicClickListener implements
+    		DialogInterface.OnClickListener {
+		public void onClick(DialogInterface dialog, int which) {
+			Bundle extras = getIntent().getExtras();
+			
+			new SubmitPhotoTask().execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
+					extras.getInt( "species")+"", currentActivity.getString( R.string.sendURL ));
+	
+			Intent intent = new Intent( currentActivity , ScreenSlideActivity.class );
+			startActivity( intent );	
+		}
+	}
+
+	
+	
+	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
