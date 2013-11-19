@@ -7,11 +7,20 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 
 public class SubmitTask extends AsyncTask<String, String, String> {
+	
+	Activity currentActivity;
+
+	public SubmitTask(Activity currentActivity){
+		this.currentActivity = currentActivity;
+	}
 
 	@Override
 	protected void onPreExecute() {
@@ -36,12 +45,12 @@ public class SubmitTask extends AsyncTask<String, String, String> {
 			
 			Log.e( "log_tag", "BLAAAAAAAAAAAA" + params[0] + "  " + params[1] + "  " + params[2] + "  " + params[3] + "  " + params[4]);
 
-			String str = "HI";
+			Toast.makeText( currentActivity.getApplicationContext(), "Sighting sent successfully", Toast.LENGTH_LONG ).show();
 
-			return str;
+			return "success";
 
 		} catch (Exception e) {
-			//Toast.makeText( myActivity.getApplicationContext(), "Connetion Failed", Toast.LENGTH_SHORT ).show();
+			Toast.makeText( currentActivity.getApplicationContext(), "Failed to send Sighting", Toast.LENGTH_SHORT ).show();
 		}
 
 		return null;

@@ -185,7 +185,6 @@ public class PhotoIntentActivity extends Activity {
 		new Button.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			takePhoto = true;
 			dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
 		}
 	};
@@ -253,11 +252,11 @@ public class PhotoIntentActivity extends Activity {
 		public void onClick(DialogInterface dialog, int which) {
 			Bundle extras = getIntent().getExtras();
 			
-			new SubmitPhotoTask().execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
-					extras.getInt( "species")+"", currentActivity.getString( R.string.sendURL ));
+			new SubmitPhotoTask(currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
+					extras.getInt( "species")+"", currentActivity.getString( R.string.sendURL ), "noPic" );
 	
-			Intent intent = new Intent( currentActivity , ScreenSlideActivity.class );
-			startActivity( intent );	
+//			Intent intent = new Intent( currentActivity , ScreenSlideActivity.class );
+//			startActivity( intent );	
 		}
 	}
 
@@ -270,6 +269,7 @@ public class PhotoIntentActivity extends Activity {
 		switch (requestCode) {
 		case ACTION_TAKE_PHOTO_B: {
 			if (resultCode == RESULT_OK) {
+				takePhoto = true;
 				handleBigCameraPhoto();
 			}
 			break;
@@ -342,20 +342,19 @@ public class PhotoIntentActivity extends Activity {
 		
 		if (takePhoto){
 			Log.e( "log_tag", "This is the takePhoto true - " + imageName );
-			new SubmitPhotoTask().execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
+			new SubmitPhotoTask(this.currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
 				extras.getInt( "species")+"", this.getString( R.string.sendURL ), imageName );
-		
 		}
 		else{
 			Log.e( "log_tag", "This is the takePhoto false." );
-			new SubmitPhotoTask().execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
-					extras.getInt( "species")+"", this.getString( R.string.sendURL ));
+			new SubmitPhotoTask(this.currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
+					extras.getInt( "species")+"", this.getString( R.string.sendURL ), null);
 //			new SubmitTask().execute( extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
 //					extras.getInt( "species")+"", this.getString( R.string.sendURL ) );
 		}					
 		
-		Intent intent = new Intent( this , ScreenSlideActivity.class );
-		startActivity( intent );
+//		Intent intent = new Intent( this , ScreenSlideActivity.class );
+//		startActivity( intent );
 	}
 
 }
