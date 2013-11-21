@@ -64,7 +64,7 @@ public class RegisterTask extends AsyncTask<String, String, String> {
 	protected void onPostExecute( String str ) {
 
 		if ( str.equals("user registered")) {
-			Toast.makeText( currentActivity.getApplicationContext(), "Congratulations you are registered", Toast.LENGTH_LONG ).show(); 
+			Toast.makeText( currentActivity.getApplicationContext(), "Congratulations you are registered", Toast.LENGTH_SHORT ).show(); 
 
 			// Here you need to check preferences if it's a First Time user then you have to send it to instructions page
 

@@ -219,46 +219,49 @@ public class PhotoIntentActivity extends Activity {
 		}
 		
 		currentActivity = this;
-		showDialog(DIALOG_ALERT);
+		
+		dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
+		
+//		showDialog(DIALOG_ALERT);
 		
 	}
 	
-	protected Dialog onCreateDialog(int id) {
-	    switch (id) {
-	    case DIALOG_ALERT:
-	      // create out AlterDialog
-	      Builder builder = new AlertDialog.Builder(this);
-	      builder.setMessage("Do you want to take a picture");
-	      builder.setCancelable(true);
-	      builder.setNegativeButton("No, Just Send", new NoPicClickListener());
-	      builder.setPositiveButton("Yes, Snap a Pic", new SnapPicClickListener());
-	      AlertDialog dialog = builder.create();
-	      dialog.show();
-	    }
-	    return super.onCreateDialog(id);
-	  }
+//	protected Dialog onCreateDialog(int id) {
+//	    switch (id) {
+//	    case DIALOG_ALERT:
+//	      // create out AlterDialog
+//	      Builder builder = new AlertDialog.Builder(this);
+//	      builder.setMessage("Do you want to take a picture");
+//	      builder.setCancelable(true);
+//	      builder.setNegativeButton("No, Just Send", new NoPicClickListener());
+//	      builder.setPositiveButton("Yes, Snap a Pic", new SnapPicClickListener());
+//	      AlertDialog dialog = builder.create();
+//	      dialog.show();
+//	    }
+//	    return super.onCreateDialog(id);
+//	  }
+//	
+//	
+//	private final class SnapPicClickListener implements
+//			DialogInterface.OnClickListener {
+//		public void onClick(DialogInterface dialog, int which) {
+//			// Forward to Camera
+//			dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
+//		}
+//	}
 	
-	
-	private final class SnapPicClickListener implements
-			DialogInterface.OnClickListener {
-		public void onClick(DialogInterface dialog, int which) {
-			// Forward to Camera
-			dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
-		}
-	}
-	
-	private final class NoPicClickListener implements
-    		DialogInterface.OnClickListener {
-		public void onClick(DialogInterface dialog, int which) {
-			Bundle extras = getIntent().getExtras();
-			
-			new SubmitPhotoTask(currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
-					extras.getInt( "species")+"", currentActivity.getString( R.string.sendURL ), "noPic" );
-	
-//			Intent intent = new Intent( currentActivity , ScreenSlideActivity.class );
-//			startActivity( intent );	
-		}
-	}
+//	private final class NoPicClickListener implements
+//    		DialogInterface.OnClickListener {
+//		public void onClick(DialogInterface dialog, int which) {
+//			Bundle extras = getIntent().getExtras();
+//			
+//			new SubmitPhotoTask(currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
+//					extras.getInt( "species")+"", currentActivity.getString( R.string.sendURL ), "noPic" );
+//	
+////			Intent intent = new Intent( currentActivity , ScreenSlideActivity.class );
+////			startActivity( intent );	
+//		}
+//	}
 
 	
 	

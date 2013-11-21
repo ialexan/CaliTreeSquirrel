@@ -45,7 +45,7 @@ public class SubmitTask extends AsyncTask<String, String, String> {
 			
 			Log.e( "log_tag", "BLAAAAAAAAAAAA" + params[0] + "  " + params[1] + "  " + params[2] + "  " + params[3] + "  " + params[4]);
 
-			Toast.makeText( currentActivity.getApplicationContext(), "Sighting sent successfully", Toast.LENGTH_LONG ).show();
+			Toast.makeText( currentActivity.getApplicationContext(), "Sighting sent successfully", Toast.LENGTH_SHORT).show();
 
 			return "success";
 

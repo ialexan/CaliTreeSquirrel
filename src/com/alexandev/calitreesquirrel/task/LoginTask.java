@@ -64,7 +64,7 @@ public class LoginTask extends AsyncTask<String, String, String> {
 //		Log.e( "log_tag", "This is str -" + str + "- this is it.");
 		
 		if ( str.equals("loggedIn")) {
-			Toast.makeText( currentActivity.getApplicationContext(), "Your Logged In", Toast.LENGTH_LONG ).show(); 
+			Toast.makeText( currentActivity.getApplicationContext(), "Your Logged In", Toast.LENGTH_SHORT ).show(); 
 			
 			// Here you need to check preferences if it's a First Time user then you have to send it to instructions page
 			

@@ -15,6 +15,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -232,18 +233,21 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 		else if ( squirrelName == getString(R.string.name5))
 			species = 5;
 		
-		
-		Intent intent = new Intent( this.getActivity() , PhotoIntentActivity.class );
-		
 		Bundle mBundle = new Bundle();
 		mBundle.putString("timestamp", timestamp);
 		mBundle.putString( "latitude", latitude.toString());
 		mBundle.putString( "longitude", longitude.toString());
 		mBundle.putInt( "species", species);
-		intent.putExtras(mBundle);
-		
-		startActivity( intent );
 
+		
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+        // Create and show the dialog.
+        SquirrelsDialogFragment newFragment = new SquirrelsDialogFragment();
+        newFragment.setCurrentActivity(getActivity());
+        newFragment.setmBundle(mBundle);
+        newFragment.show(ft, "dialog");
+		
+		
 //		SubmitTask submitTask = new SubmitTask();
 //		submitTask.execute( timestamp, latitude.toString(), longitude.toString(), species+"", this.getActivity().getString( R.string.sendURL ) );
 	
