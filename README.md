@@ -7,6 +7,10 @@ Dependencies
 ============
 
 Android-support-v13.jar
+httpmime-4.2.6.jar
 
+Author
+=====
+Ishag Alexanian - email: ishagalexanian@gmail.com
 
 
