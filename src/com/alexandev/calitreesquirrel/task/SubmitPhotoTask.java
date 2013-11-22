@@ -49,13 +49,12 @@ public class SubmitPhotoTask extends AsyncTask<String, String, String> {
 			JSONObject json = con.sendImageToServer( params[4],entity );
              
 			Log.e( "log_tag", "This is the json -" + json.toString() + "- this is it.");
-			
-//			Toast.makeText( currentActivity.getApplicationContext(), "Sighting sent successfully", Toast.LENGTH_LONG ).show();
+		
 
 			return json.toString();
 
 		} catch (Exception e) {
-//			Toast.makeText( currentActivity.getApplicationContext(), "Failed to send Sighting", Toast.LENGTH_SHORT ).show();
+			Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_SHORT ).show();
 		}
 
 		
@@ -65,7 +64,6 @@ public class SubmitPhotoTask extends AsyncTask<String, String, String> {
 
 	@Override
 	protected void onPostExecute( String str ) {
-
 			
 		//		if ( str != null)
 		//			Toast.makeText( myActivity.getApplicationContext(), "Success is (" + str + ")", Toast.LENGTH_LONG ).show(); 

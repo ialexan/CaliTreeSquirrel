@@ -59,7 +59,8 @@ public class SubmitTask extends AsyncTask<String, String, String> {
 
 	@Override
 	protected void onPostExecute( String str ) {
-
+		Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_SHORT ).show();
+		
 //		if ( str != null)
 //			Toast.makeText( myActivity.getApplicationContext(), "Success is (" + str + ")", Toast.LENGTH_LONG ).show(); 
 //		else

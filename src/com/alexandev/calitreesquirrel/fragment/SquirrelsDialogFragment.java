@@ -59,6 +59,8 @@ public class SquirrelsDialogFragment extends DialogFragment {
                 	   if (negativeButtonMessage.equals("No, Just Send Sighting!")){
                 		   new SubmitPhotoTask(currentActivity).execute(mBundle.getString("timestamp"), mBundle.getString( "latitude"), mBundle.getString( "longitude"), 
                 			   mBundle.getInt( "species")+"", currentActivity.getString( R.string.sendURL ), "noPic" );
+                		   
+                			Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_LONG ).show();
                 	   }
                 	   else if (negativeButtonMessage.equals("No")){
                            dialog.cancel();

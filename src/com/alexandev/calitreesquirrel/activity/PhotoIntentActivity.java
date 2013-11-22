@@ -355,9 +355,10 @@ public class PhotoIntentActivity extends Activity {
 //			new SubmitTask().execute( extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
 //					extras.getInt( "species")+"", this.getString( R.string.sendURL ) );
 		}					
+		Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_LONG ).show();
 		
-//		Intent intent = new Intent( this , ScreenSlideActivity.class );
-//		startActivity( intent );
+		Intent intent = new Intent( this , ScreenSlideActivity.class );
+		startActivity( intent );
 	}
 
 }
