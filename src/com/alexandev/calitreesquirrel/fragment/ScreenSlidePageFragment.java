@@ -64,6 +64,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 	private static Double longitude;
 	private LocationManager locationManager;
 
+
 	/**
 	 * Factory method for this fragment class. Constructs a new fragment for the given page number.
 	 */
@@ -182,12 +183,26 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 		final String name = ((TextView) rootView.findViewById(android.R.id.text1)).getText().toString() ;
 
 		View sawItButtonView = (Button) rootView.findViewById(R.id.button1);
+		
+	
 		sawItButtonView.setOnClickListener( new View.OnClickListener() {
 			public void onClick(final View view) {
 
 				locationManager.requestLocationUpdates(provider, 400, 1, locListener);
 				Location location = locationManager.getLastKnownLocation(provider);
 
+				// GPS check
+				if ( !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+					FragmentTransaction ft = getFragmentManager().beginTransaction();
+				    SquirrelsDialogFragment dialogFragment = new SquirrelsDialogFragment();
+					dialogFragment.setCurrentActivity(getActivity());
+			        dialogFragment.setMessage("Your GPS seems to be disabled, do you want to enable it?");
+			        dialogFragment.setPositiveButtonMessage("Yes");
+			        dialogFragment.setNegativeButtonMessage("No");
+			        dialogFragment.show(ft, "dialog");
+		        }
+				
+				
 				latitude =  location.getLatitude();
 				longitude = location.getLongitude();
 
@@ -240,13 +255,18 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 		mBundle.putInt( "species", species);
 
 		
-		FragmentTransaction ft = getFragmentManager().beginTransaction();
-        // Create and show the dialog.
-        SquirrelsDialogFragment newFragment = new SquirrelsDialogFragment();
-        newFragment.setCurrentActivity(getActivity());
-        newFragment.setmBundle(mBundle);
-        newFragment.show(ft, "dialog");
 		
+		if ( locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+			FragmentTransaction ft = getFragmentManager().beginTransaction();
+			SquirrelsDialogFragment dialogFragment = new SquirrelsDialogFragment();
+	    
+			dialogFragment.setCurrentActivity(getActivity());
+			dialogFragment.setmBundle(mBundle);
+			dialogFragment.setMessage("Do you want to take a picture?");
+			dialogFragment.setPositiveButtonMessage("Yes, Snap a Picture!");
+			dialogFragment.setNegativeButtonMessage("No, Just Send Sighting!");
+			dialogFragment.show(ft, "dialog");
+		}
 		
 //		SubmitTask submitTask = new SubmitTask();
 //		submitTask.execute( timestamp, latitude.toString(), longitude.toString(), species+"", this.getActivity().getString( R.string.sendURL ) );

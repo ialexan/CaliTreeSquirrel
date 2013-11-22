@@ -22,6 +22,12 @@ public class SquirrelsDialogFragment extends DialogFragment {
 	
 	private Bundle mBundle;
 	
+	private String message = "";
+	
+	private String positiveButtonMessage = "";
+	
+	private String negativeButtonMessage = "";
+	
 	public SquirrelsDialogFragment(){
 		this.currentActivity = new Activity();
 		this.mBundle = new Bundle();
@@ -31,22 +37,32 @@ public class SquirrelsDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity);
-        builder.setMessage("Do you want to take a picture?")
-               .setPositiveButton("Yes, Snap a Picture!", new DialogInterface.OnClickListener() {
+        builder.setMessage(message)  
+               .setPositiveButton(positiveButtonMessage, new DialogInterface.OnClickListener() { 
                    public void onClick(DialogInterface dialog, int id) {
-               			Intent intent = new Intent( currentActivity , PhotoIntentActivity.class );
-               			intent.putExtras(mBundle);
-               			startActivity( intent );
+                	   if (positiveButtonMessage.equals("Yes, Snap a Picture!")){
+                		    Intent intent = new Intent( currentActivity , PhotoIntentActivity.class );
+               				intent.putExtras(mBundle);
+               				startActivity( intent );
+                	   }
+                	   else if (positiveButtonMessage.equals("Yes")){
+                           startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                          // Toast.makeText( currentActivity.getApplicationContext(), "Click Saw It again!", Toast.LENGTH_SHORT ).show();
+                	   }
                 	   
 //           		   Toast.makeText( currentActivity.getApplicationContext(), "The answer is yes", Toast.LENGTH_SHORT ).show();
 //                	   Log.e( "log_tag", " The answer is Yes ");
                    }
                })
-               .setNegativeButton("No, Just Send Sighting!", new DialogInterface.OnClickListener() {
+               .setNegativeButton(negativeButtonMessage, new DialogInterface.OnClickListener() { 
                    public void onClick(DialogInterface dialog, int id) {
-            	
-                	   new SubmitPhotoTask(currentActivity).execute(mBundle.getString("timestamp"), mBundle.getString( "latitude"), mBundle.getString( "longitude"), 
+                	   if (negativeButtonMessage.equals("No, Just Send Sighting!")){
+                		   new SubmitPhotoTask(currentActivity).execute(mBundle.getString("timestamp"), mBundle.getString( "latitude"), mBundle.getString( "longitude"), 
                 			   mBundle.getInt( "species")+"", currentActivity.getString( R.string.sendURL ), "noPic" );
+                	   }
+                	   else if (negativeButtonMessage.equals("No")){
+                           dialog.cancel();
+                	   }
                 	   
 //                	   Toast.makeText( currentActivity.getApplicationContext(), "The answer is no", Toast.LENGTH_SHORT ).show(); 
 //                	   Log.e( "log_tag", "This answer is No");
@@ -73,6 +89,28 @@ public class SquirrelsDialogFragment extends DialogFragment {
 		this.mBundle = mBundle;
 	}
 
-	
+	public String getPositiveButtonMessage() {
+		return positiveButtonMessage;
+	}
+
+	public void setPositiveButtonMessage(String positiveButtonMessage) {
+		this.positiveButtonMessage = positiveButtonMessage;
+	}
+
+	public String getNegativeButtonMessage() {
+		return negativeButtonMessage;
+	}
+
+	public void setNegativeButtonMessage(String negativeButtonMessage) {
+		this.negativeButtonMessage = negativeButtonMessage;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
     
 }
