@@ -7,6 +7,8 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.json.JSONObject;
 
+import com.alexandev.calitreesquirrel.util.PreferencesCheck;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -29,6 +31,11 @@ public class SubmitPhotoTask extends AsyncTask<String, String, String> {
 	protected String doInBackground(String... params) {
 
 		try {
+			
+			PreferencesCheck pref = new PreferencesCheck();
+			Log.e( "log_tag", "The username is -" + pref.getLoggedIn(currentActivity).get("username") + "- this is it.");
+			Log.e( "log_tag", "The password is -" + pref.getLoggedIn(currentActivity).get("password") + "- this is it.");
+			
 			
 //			File file = new File(Environment.getExternalStoragePublicDirectory(
 //					Environment.DIRECTORY_DCIM).toString()

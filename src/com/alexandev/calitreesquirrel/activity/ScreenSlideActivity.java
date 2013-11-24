@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -19,7 +20,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class ScreenSlideActivity extends FragmentActivity  {
-	
+
 	// The number of pages (wizard steps) to show in this demo.
 	private static final int NUM_PAGES = 5;
 
@@ -30,25 +31,32 @@ public class ScreenSlideActivity extends FragmentActivity  {
 	//The pager adapter, which provides the pages to the view pager widget.
 	private PagerAdapter mPagerAdapter;
 
+	PreferencesCheck pref = new PreferencesCheck();
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_screen_slide);
 
-		if ( PreferencesCheck.isFirst(this) ){
+		if ( pref.isFirst(this) ){
 			Toast.makeText( getApplicationContext(),"First Time user!!!", Toast.LENGTH_LONG ).show();
 			Intent intent = new Intent(this, CoverPageActivity.class);
 			startActivity(intent);
 		}
-		
-//		if ( PreferencesCheck.isLoggedIn(this) ){
-//			Toast.makeText( getApplicationContext(),"Not Logged in", Toast.LENGTH_LONG ).show();
-//			Intent intent = new Intent( this, LoginActivity.class );
+
+//		if ( (pref.getLoggedIn(this).get("username") == null) && (pref.getLoggedIn(this).get("password") == null) ){
+//			Intent intent = new Intent(this, LoginActivity.class);
 //			startActivity(intent);
 //		}
 
-//		PreferencesCheck.resetFirstTime(this);
+		//		if ( PreferencesCheck.isLoggedIn(this) ){
+		//			Toast.makeText( getApplicationContext(),"Not Logged in", Toast.LENGTH_LONG ).show();
+		//			Intent intent = new Intent( this, LoginActivity.class );
+		//			startActivity(intent);
+		//		}
+
+		//		PreferencesCheck.resetFirstTime(this);
 
 		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);
@@ -83,6 +91,16 @@ public class ScreenSlideActivity extends FragmentActivity  {
 		return true;
 	}
 
+	@Override
+	protected void onResume(){
+		super.onResume();
+		
+		if ( (pref.getLoggedIn(this).get("username") == null) && (pref.getLoggedIn(this).get("password") == null) ){
+			Intent intent = new Intent(this, LoginActivity.class);
+			startActivity(intent);
+		}
+	}
+
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -110,7 +128,7 @@ public class ScreenSlideActivity extends FragmentActivity  {
 			return true;     
 
 		case R.id.action_signout:    
-			PreferencesCheck.setLoggedIn( this, false );
+			pref.setLoggedIn( this, null, null );
 			startActivity( new Intent( this, LoginActivity.class ) );
 			return true;     
 

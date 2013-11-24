@@ -49,6 +49,9 @@ public class RegisterTask extends AsyncTask<String, String, String> {
 //			Log.e( "log_tag", "This is parameters -username-" + params[0] + " -password- " + params[1] + " - " + params[2] + " - " + params[3] + " - " + params[4] + "- this is it.");
 
 			String message = (String) json.get("user");
+			
+			PreferencesCheck pref = new PreferencesCheck();
+			pref.setLoggedIn( currentActivity , params[0], md5Password.getEncryptedValue() );
 
 			return message;
 
@@ -66,9 +69,6 @@ public class RegisterTask extends AsyncTask<String, String, String> {
 		if ( str.equals("user registered")) {
 			Toast.makeText( currentActivity.getApplicationContext(), "Congratulations you are registered", Toast.LENGTH_SHORT ).show(); 
 
-			// Here you need to check preferences if it's a First Time user then you have to send it to instructions page
-
-			PreferencesCheck.setLoggedIn( currentActivity, true);
 			Intent intent = new Intent( currentActivity, ScreenSlideActivity.class );
 			currentActivity.startActivity( intent );
 		}

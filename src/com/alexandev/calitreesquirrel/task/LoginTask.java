@@ -9,6 +9,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import com.alexandev.calitreesquirrel.activity.ScreenSlideActivity;
+import com.alexandev.calitreesquirrel.util.MD5;
 import com.alexandev.calitreesquirrel.util.PreferencesCheck;
 
 import android.app.Activity;
@@ -48,6 +49,10 @@ public class LoginTask extends AsyncTask<String, String, String> {
 //			Log.e( "log_tag", "This is parameters --" + params[0] + " - " + params[1] + " - " + params[2] + "- this is it.");
 //			Log.e( "log_tag", "This is the json -" + message + "- this is it.");
 
+			PreferencesCheck pref = new PreferencesCheck();
+			MD5 md5Password = new MD5( params[1] );
+			pref.setLoggedIn( currentActivity , params[0], md5Password.getEncryptedValue());
+			
 			return message;
 
 		} catch (Exception e) {
@@ -65,10 +70,7 @@ public class LoginTask extends AsyncTask<String, String, String> {
 		
 		if ( str.equals("loggedIn")) {
 			Toast.makeText( currentActivity.getApplicationContext(), "Your Logged In", Toast.LENGTH_SHORT ).show(); 
-			
-			// Here you need to check preferences if it's a First Time user then you have to send it to instructions page
-			
-			PreferencesCheck.setLoggedIn( currentActivity , true );
+
 			Intent intent = new Intent( currentActivity, ScreenSlideActivity.class );
 			currentActivity.startActivity( intent );
 		}

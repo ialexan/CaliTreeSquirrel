@@ -3,10 +3,12 @@ package com.alexandev.calitreesquirrel.activity;
 
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.task.LoginTask;
+import com.alexandev.calitreesquirrel.util.PreferencesCheck;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -17,6 +19,14 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		PreferencesCheck pref = new PreferencesCheck();
+		if ( (pref.getLoggedIn(this).get("username") != null) && (pref.getLoggedIn(this).get("password") != null) ){
+			Intent intent = new Intent( this, ScreenSlideActivity.class );
+			this.startActivity( intent );
+		}
+
+		
 	}
 
 	//	@Override

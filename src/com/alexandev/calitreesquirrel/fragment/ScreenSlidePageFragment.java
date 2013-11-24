@@ -8,7 +8,6 @@ import java.util.Date;
 
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.activity.PhotoIntentActivity;
-import com.alexandev.calitreesquirrel.task.SubmitTask;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

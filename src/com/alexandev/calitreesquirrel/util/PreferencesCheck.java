@@ -2,12 +2,13 @@ package com.alexandev.calitreesquirrel.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 
 public class PreferencesCheck {
 
-	private static final String MY_PREFERENCES = "my_preferences";  
+	private final String MY_PREFERENCES = "Squirrels_preferences";  
 
-	public static boolean isFirst(Context context){
+	public boolean isFirst(Context context){
 		final SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, 0); 
 		
 		final boolean first = reader.getBoolean("isFirst", true);
@@ -19,7 +20,7 @@ public class PreferencesCheck {
 		return first;
 	}
 
-	public static void resetFirstTime(Context context){
+	public void resetFirstTime(Context context){
 		final SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, 0); 
 
 		final SharedPreferences.Editor editor = reader.edit();
@@ -27,18 +28,23 @@ public class PreferencesCheck {
 		editor.commit();
 	}
 	
-	public static boolean isLoggedIn(Context context){
-		final SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, 0); 
+	public Bundle getLoggedIn(Context context){
+		SharedPreferences pref = context.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
 		
-		final boolean loggedIn = reader.getBoolean("isLoggedIn", false);
-		return loggedIn;
+		Bundle bundle = new Bundle();
+		bundle.putString( "username", pref.getString("username", null) );
+		bundle.putString( "password", pref.getString("password", null) );
+		
+		return bundle;
 	}
 	
-	public static void setLoggedIn(Context context, Boolean loggedIn){
-		final SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, 0); 
+	public void setLoggedIn(Context context, String username, String password){
 		
-		final SharedPreferences.Editor editor = reader.edit();
-		editor.putBoolean("isLoggedIn", loggedIn); 
+		SharedPreferences pref = context.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
+		
+		SharedPreferences.Editor editor = pref.edit();
+		editor.putString("username", username);
+		editor.putString("password", password);
 		editor.commit();
 	}
 

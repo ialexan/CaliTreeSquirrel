@@ -30,7 +30,6 @@ import android.widget.Toast;
 
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.task.SubmitPhotoTask;
-import com.alexandev.calitreesquirrel.task.SubmitTask;
 
 public class PhotoIntentActivity extends Activity {
 
