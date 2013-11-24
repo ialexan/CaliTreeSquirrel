@@ -44,11 +44,11 @@ public class ScreenSlideActivity extends FragmentActivity  {
 			Intent intent = new Intent(this, CoverPageActivity.class);
 			startActivity(intent);
 		}
-
-//		if ( (pref.getLoggedIn(this).get("username") == null) && (pref.getLoggedIn(this).get("password") == null) ){
-//			Intent intent = new Intent(this, LoginActivity.class);
-//			startActivity(intent);
-//		}
+		
+		if ( (pref.getLoggedIn(this).get("username") == null) && (pref.getLoggedIn(this).get("password") == null) ){
+			Intent intent = new Intent(this, LoginActivity.class);
+			startActivity(intent);
+		}
 
 		//		if ( PreferencesCheck.isLoggedIn(this) ){
 		//			Toast.makeText( getApplicationContext(),"Not Logged in", Toast.LENGTH_LONG ).show();

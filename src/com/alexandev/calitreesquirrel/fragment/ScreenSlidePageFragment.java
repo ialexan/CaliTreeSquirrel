@@ -261,9 +261,9 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 	    
 			dialogFragment.setCurrentActivity(getActivity());
 			dialogFragment.setmBundle(mBundle);
-			dialogFragment.setMessage("Do you want to take a picture?");
-			dialogFragment.setPositiveButtonMessage("Yes, Snap a Picture!");
-			dialogFragment.setNegativeButtonMessage("No, Just Send Sighting!");
+			dialogFragment.setMessage("Do you want to take a picture of the Squirrel?");
+			dialogFragment.setPositiveButtonMessage("Yes, Snap a Pic!");
+			dialogFragment.setNegativeButtonMessage("No, Just Send!");
 			dialogFragment.show(ft, "dialog");
 		}
 		

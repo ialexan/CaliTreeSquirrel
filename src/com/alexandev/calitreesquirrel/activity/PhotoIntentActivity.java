@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.task.SubmitPhotoTask;
+import com.alexandev.calitreesquirrel.util.NetworkDataConnection;
 
 public class PhotoIntentActivity extends Activity {
 
@@ -46,24 +47,24 @@ public class PhotoIntentActivity extends Activity {
 	private static final String JPEG_FILE_SUFFIX = ".jpg";
 
 	private AlbumStorageDirFactory mAlbumStorageDirFactory = null;
-	
+
 	private Boolean takePhoto = false;
-    private String imageName = "Nothing";
-    
-    private static final int DIALOG_ALERT = 10;
-    private Activity currentActivity;
-	
+	private String imageName = "Nothing";
+
+	private static final int DIALOG_ALERT = 10;
+	private Activity currentActivity;
+
 	/* Photo album for this application */
 	private String getAlbumName() {
 		return getString(R.string.photo_album_name);
 	}
 
-	
+
 	private File getAlbumDir() {
 		File storageDir = null;
 
 		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-			
+
 			storageDir = mAlbumStorageDirFactory.getAlbumStorageDir(getAlbumName());
 
 			if (storageDir != null) {
@@ -74,11 +75,11 @@ public class PhotoIntentActivity extends Activity {
 					}
 				}
 			}
-			
+
 		} else {
 			Log.v(getString(R.string.app_name), "External storage is not mounted READ/WRITE.");
 		}
-		
+
 		return storageDir;
 	}
 
@@ -92,11 +93,11 @@ public class PhotoIntentActivity extends Activity {
 	}
 
 	private File setUpPhotoFile() throws IOException {
-		
+
 		File f = createImageFile();
 		mCurrentPhotoPath = f.getAbsolutePath();
 		imageName = mCurrentPhotoPath; 
-		
+
 		return f;
 	}
 
@@ -115,7 +116,7 @@ public class PhotoIntentActivity extends Activity {
 		BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
 		int photoW = bmOptions.outWidth;
 		int photoH = bmOptions.outHeight;
-		
+
 		/* Figure out which way needs to be reduced less */
 		int scaleFactor = 1;
 		if ((targetW > 0) || (targetH > 0)) {
@@ -129,18 +130,18 @@ public class PhotoIntentActivity extends Activity {
 
 		/* Decode the JPEG file into a Bitmap */
 		Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-		
+
 		/* Associate the Bitmap to the ImageView */
 		mImageView.setImageBitmap(bitmap);
 		mImageView.setVisibility(View.VISIBLE);
 	}
 
 	private void galleryAddPic() {
-		    Intent mediaScanIntent = new Intent("android.intent.action.MEDIA_SCANNER_SCAN_FILE");
-			File f = new File(mCurrentPhotoPath);
-		    Uri contentUri = Uri.fromFile(f);
-		    mediaScanIntent.setData(contentUri);
-		    this.sendBroadcast(mediaScanIntent);
+		Intent mediaScanIntent = new Intent("android.intent.action.MEDIA_SCANNER_SCAN_FILE");
+		File f = new File(mCurrentPhotoPath);
+		Uri contentUri = Uri.fromFile(f);
+		mediaScanIntent.setData(contentUri);
+		this.sendBroadcast(mediaScanIntent);
 	}
 
 	private void dispatchTakePictureIntent(int actionCode) {
@@ -150,7 +151,7 @@ public class PhotoIntentActivity extends Activity {
 		switch(actionCode) {
 		case ACTION_TAKE_PHOTO_B:
 			File f = null;
-			
+
 			try {
 				f = setUpPhotoFile();
 				mCurrentPhotoPath = f.getAbsolutePath();
@@ -181,18 +182,18 @@ public class PhotoIntentActivity extends Activity {
 	}
 
 	Button.OnClickListener mTakePicOnClickListener = 
-		new Button.OnClickListener() {
+			new Button.OnClickListener() {
 		@Override
 		public void onClick(View v) {
 			dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
 		}
 	};
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -201,70 +202,70 @@ public class PhotoIntentActivity extends Activity {
 
 		mImageView = (ImageView) findViewById(R.id.imageView1);
 		mImageBitmap = null;
-		
+
 
 		Button picBtn = (Button) findViewById(R.id.btnIntend);
 		setBtnListenerOrDisable( 
 				picBtn, 
 				mTakePicOnClickListener,
 				MediaStore.ACTION_IMAGE_CAPTURE
-		);
+				);
 
-		
+
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
 			mAlbumStorageDirFactory = new FroyoAlbumDirFactory();
 		} else {
 			mAlbumStorageDirFactory = new BaseAlbumDirFactory();
 		}
-		
-		currentActivity = this;
-		
-		dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
-		
-//		showDialog(DIALOG_ALERT);
-		
-	}
-	
-//	protected Dialog onCreateDialog(int id) {
-//	    switch (id) {
-//	    case DIALOG_ALERT:
-//	      // create out AlterDialog
-//	      Builder builder = new AlertDialog.Builder(this);
-//	      builder.setMessage("Do you want to take a picture");
-//	      builder.setCancelable(true);
-//	      builder.setNegativeButton("No, Just Send", new NoPicClickListener());
-//	      builder.setPositiveButton("Yes, Snap a Pic", new SnapPicClickListener());
-//	      AlertDialog dialog = builder.create();
-//	      dialog.show();
-//	    }
-//	    return super.onCreateDialog(id);
-//	  }
-//	
-//	
-//	private final class SnapPicClickListener implements
-//			DialogInterface.OnClickListener {
-//		public void onClick(DialogInterface dialog, int which) {
-//			// Forward to Camera
-//			dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
-//		}
-//	}
-	
-//	private final class NoPicClickListener implements
-//    		DialogInterface.OnClickListener {
-//		public void onClick(DialogInterface dialog, int which) {
-//			Bundle extras = getIntent().getExtras();
-//			
-//			new SubmitPhotoTask(currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
-//					extras.getInt( "species")+"", currentActivity.getString( R.string.sendURL ), "noPic" );
-//	
-////			Intent intent = new Intent( currentActivity , ScreenSlideActivity.class );
-////			startActivity( intent );	
-//		}
-//	}
 
-	
-	
-	
+		currentActivity = this;
+
+		dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
+
+		//		showDialog(DIALOG_ALERT);
+
+	}
+
+	//	protected Dialog onCreateDialog(int id) {
+	//	    switch (id) {
+	//	    case DIALOG_ALERT:
+	//	      // create out AlterDialog
+	//	      Builder builder = new AlertDialog.Builder(this);
+	//	      builder.setMessage("Do you want to take a picture");
+	//	      builder.setCancelable(true);
+	//	      builder.setNegativeButton("No, Just Send", new NoPicClickListener());
+	//	      builder.setPositiveButton("Yes, Snap a Pic", new SnapPicClickListener());
+	//	      AlertDialog dialog = builder.create();
+	//	      dialog.show();
+	//	    }
+	//	    return super.onCreateDialog(id);
+	//	  }
+	//	
+	//	
+	//	private final class SnapPicClickListener implements
+	//			DialogInterface.OnClickListener {
+	//		public void onClick(DialogInterface dialog, int which) {
+	//			// Forward to Camera
+	//			dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
+	//		}
+	//	}
+
+	//	private final class NoPicClickListener implements
+	//    		DialogInterface.OnClickListener {
+	//		public void onClick(DialogInterface dialog, int which) {
+	//			Bundle extras = getIntent().getExtras();
+	//			
+	//			new SubmitPhotoTask(currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
+	//					extras.getInt( "species")+"", currentActivity.getString( R.string.sendURL ), "noPic" );
+	//	
+	////			Intent intent = new Intent( currentActivity , ScreenSlideActivity.class );
+	////			startActivity( intent );	
+	//		}
+	//	}
+
+
+
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -285,7 +286,7 @@ public class PhotoIntentActivity extends Activity {
 		outState.putParcelable(BITMAP_STORAGE_KEY, mImageBitmap);
 
 		outState.putBoolean(IMAGEVIEW_VISIBILITY_STORAGE_KEY, (mImageBitmap != null) );
-		
+
 		super.onSaveInstanceState(outState);
 	}
 
@@ -293,13 +294,13 @@ public class PhotoIntentActivity extends Activity {
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		mImageBitmap = savedInstanceState.getParcelable(BITMAP_STORAGE_KEY);
-	
+
 		mImageView.setImageBitmap(mImageBitmap);
 		mImageView.setVisibility(
 				savedInstanceState.getBoolean(IMAGEVIEW_VISIBILITY_STORAGE_KEY) ? 
 						ImageView.VISIBLE : ImageView.INVISIBLE
-		);
-		
+				);
+
 	}
 
 	/**
@@ -319,8 +320,8 @@ public class PhotoIntentActivity extends Activity {
 		final PackageManager packageManager = context.getPackageManager();
 		final Intent intent = new Intent(action);
 		List<ResolveInfo> list =
-			packageManager.queryIntentActivities(intent,
-					PackageManager.MATCH_DEFAULT_ONLY);
+				packageManager.queryIntentActivities(intent,
+						PackageManager.MATCH_DEFAULT_ONLY);
 		return list.size() > 0;
 	}
 
@@ -328,34 +329,42 @@ public class PhotoIntentActivity extends Activity {
 			Button btn, 
 			Button.OnClickListener onClickListener,
 			String intentName
-	) {
+			) {
 		if (isIntentAvailable(this, intentName)) {
 			btn.setOnClickListener(onClickListener);        	
 		} else {
 			btn.setText( 
-				getText(R.string.cannot).toString() + " " + btn.getText());
+					getText(R.string.cannot).toString() + " " + btn.getText());
 			btn.setClickable(false);
 		}
 	}
-	
+
 	public void sendToServer( View view ){
 
 		Bundle extras = getIntent().getExtras();
-		
-		if (takePhoto){
-			Log.e( "log_tag", "This is the takePhoto true - " + imageName );
-			new SubmitPhotoTask(this.currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
-				extras.getInt( "species")+"", this.getString( R.string.sendURL ), imageName );
+
+		NetworkDataConnection networkData = new NetworkDataConnection(this);
+		// Check network connectivity
+		if (!networkData.checkConnection()){
+			Toast.makeText( currentActivity.getApplicationContext(), "Network Data Connection Unavailable!", Toast.LENGTH_LONG ).show();
 		}
-		else{
-			Log.e( "log_tag", "This is the takePhoto false." );
-			new SubmitPhotoTask(this.currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
-					extras.getInt( "species")+"", this.getString( R.string.sendURL ), null);
-//			new SubmitTask().execute( extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
-//					extras.getInt( "species")+"", this.getString( R.string.sendURL ) );
-		}					
-		Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_LONG ).show();
-		
+		else {
+
+			if (takePhoto){
+				Log.e( "log_tag", "This is the takePhoto true - " + imageName );
+				new SubmitPhotoTask(this.currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
+						extras.getInt( "species")+"", this.getString( R.string.sendURL ), imageName );
+			}
+			else{
+				Log.e( "log_tag", "This is the takePhoto false." );
+				new SubmitPhotoTask(this.currentActivity).execute(extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
+						extras.getInt( "species")+"", this.getString( R.string.sendURL ), null);
+				//			new SubmitTask().execute( extras.getString("timestamp"), extras.getString( "latitude"), extras.getString( "longitude"), 
+				//					extras.getInt( "species")+"", this.getString( R.string.sendURL ) );
+			}					
+			Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_LONG ).show();
+		}
+
 		Intent intent = new Intent( this , ScreenSlideActivity.class );
 		startActivity( intent );
 	}

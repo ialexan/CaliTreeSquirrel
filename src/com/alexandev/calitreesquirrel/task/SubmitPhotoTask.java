@@ -33,8 +33,8 @@ public class SubmitPhotoTask extends AsyncTask<String, String, String> {
 		try {
 			
 			PreferencesCheck pref = new PreferencesCheck();
-			Log.e( "log_tag", "The username is -" + pref.getLoggedIn(currentActivity).get("username") + "- this is it.");
-			Log.e( "log_tag", "The password is -" + pref.getLoggedIn(currentActivity).get("password") + "- this is it.");
+//			Log.e( "log_tag", "The username is -" + pref.getLoggedIn(currentActivity).get("username") + "- this is it.");
+//			Log.e( "log_tag", "The password is -" + pref.getLoggedIn(currentActivity).get("password") + "- this is it.");
 			
 			
 //			File file = new File(Environment.getExternalStoragePublicDirectory(
@@ -46,6 +46,8 @@ public class SubmitPhotoTask extends AsyncTask<String, String, String> {
 			entity.addPart("latitude", new StringBody(params[1]));
 			entity.addPart("longitude", new StringBody(params[2]));
 			entity.addPart("species", new StringBody(params[3]));
+			entity.addPart("username", new StringBody( (String) pref.getLoggedIn(currentActivity).get("username") ) );
+			entity.addPart("password", new StringBody( (String) pref.getLoggedIn(currentActivity).get("password") ) );
 			
 			if ( !params[5].equals("noPic") ){
 				File file = new File ( params[5] );

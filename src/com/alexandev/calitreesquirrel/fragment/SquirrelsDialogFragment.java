@@ -14,6 +14,7 @@ import android.content.Intent;
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.activity.PhotoIntentActivity;
 import com.alexandev.calitreesquirrel.task.SubmitPhotoTask;
+import com.alexandev.calitreesquirrel.util.NetworkDataConnection;
 
 
 public class SquirrelsDialogFragment extends DialogFragment {
@@ -40,7 +41,7 @@ public class SquirrelsDialogFragment extends DialogFragment {
         builder.setMessage(message)  
                .setPositiveButton(positiveButtonMessage, new DialogInterface.OnClickListener() { 
                    public void onClick(DialogInterface dialog, int id) {
-                	   if (positiveButtonMessage.equals("Yes, Snap a Picture!")){
+                	   if (positiveButtonMessage.equals("Yes, Snap a Pic!")){
                 		    Intent intent = new Intent( currentActivity , PhotoIntentActivity.class );
                				intent.putExtras(mBundle);
                				startActivity( intent );
@@ -56,11 +57,21 @@ public class SquirrelsDialogFragment extends DialogFragment {
                })
                .setNegativeButton(negativeButtonMessage, new DialogInterface.OnClickListener() { 
                    public void onClick(DialogInterface dialog, int id) {
-                	   if (negativeButtonMessage.equals("No, Just Send Sighting!")){
-                		   new SubmitPhotoTask(currentActivity).execute(mBundle.getString("timestamp"), mBundle.getString( "latitude"), mBundle.getString( "longitude"), 
-                			   mBundle.getInt( "species")+"", currentActivity.getString( R.string.sendURL ), "noPic" );
+                	   if (negativeButtonMessage.equals("No, Just Send!")){
+                		   NetworkDataConnection networkData = new NetworkDataConnection(currentActivity);
                 		   
-                			Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_LONG ).show();
+                		   // Check network connectivity
+                		   if (networkData.checkConnection()){
+                			   new SubmitPhotoTask(currentActivity).execute(mBundle.getString("timestamp"), mBundle.getString( "latitude"), mBundle.getString( "longitude"), 
+                        			   mBundle.getInt( "species")+"", currentActivity.getString( R.string.sendURL ), "noPic" );
+                        		   
+                        			Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_LONG ).show();
+                		   }
+                		   else { // No Network data Connection
+                			   Toast.makeText( currentActivity.getApplicationContext(), "Network Data Connection Unavailable!", Toast.LENGTH_LONG ).show();
+                		   }
+                		   
+                		   
                 	   }
                 	   else if (negativeButtonMessage.equals("No")){
                            dialog.cancel();
