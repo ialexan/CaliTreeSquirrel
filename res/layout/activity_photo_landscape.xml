@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/sicon_faded" >
+
+    <TextView
+        android:id="@+id/textViewPhoto1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Squirrels Sighting Picture"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+      
+   <LinearLayout 
+   android:id="@+id/buttongroup"	
+   android:orientation="vertical"
+   android:layout_height="wrap_content"
+   android:layout_width="wrap_content"
+   android:layout_marginRight="5dp"
+   android:layout_below="@+id/textViewPhoto1"
+   >
+    <Button android:text="@string/btnIntend" android:id="@+id/btnIntend"
+        android:layout_height="wrap_content"
+        android:layout_width="140dp" />
+    <Button android:text="@string/btnSend" android:id="@+id/btnSend"
+        android:layout_height="wrap_content"
+        android:layout_width="140dp" 
+        android:onClick="sendToServer" />
+  </LinearLayout>
+  <ImageView 
+	  android:layout_height="wrap_content" 
+	  android:layout_width="wrap_content" 
+      android:visibility="visible"
+      android:id="@+id/imageView1" 
+      android:layout_below="@+id/textViewPhoto1" 
+      android:layout_toRightOf="@+id/buttongroup" />
+
+</RelativeLayout>
