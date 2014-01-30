@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+
+<FrameLayout 
     android:id="@+id/content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <!-- Dummy content. -->
     <RelativeLayout android:layout_width="match_parent"
@@ -22,44 +28,46 @@
          	android:layout_marginTop="1dp" 
          	android:contentDescription="@string/description"
          	/>
+
+        <Button
+         	android:id="@+id/button1"
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_below="@+id/imageView1"
+         	android:layout_marginTop="10dp"
+         	android:layout_centerHorizontal="true"
+         	android:background="@android:drawable/btn_default"
+         	android:text="@string/sawIt"
+         	android:width="320dp" /> 
         
         <TextView android:id="@android:id/text1"
             style="?android:textAppearanceLarge"
             android:textStyle="bold"
             android:layout_width="wrap_content"
          	android:layout_height="wrap_content"
-         	android:layout_below="@+id/imageView1"
+         	android:layout_below="@+id/button1"
          	android:layout_centerHorizontal="true"
          	android:layout_marginTop="5dp"
          	android:gravity="center|center_horizontal"/>
+        
         
         <TextView
             android:id="@android:id/text2"
             style="?android:textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageView1"
             android:layout_below="@android:id/text1"
             android:layout_marginTop="5dp"
-            android:enabled="false"
             android:includeFontPadding="false"
             android:lineSpacingMultiplier="1.2"
             android:scrollHorizontally="false"
             android:textColor="#5A5A5A"
             android:textSize="17sp"
-            android:width="320dp" />
+            android:width="320dp" 
+            android:autoLink="all"
+    		android:linksClickable="true"/>
         
-        <Button
-         	android:id="@+id/button1"
-         	android:layout_width="wrap_content"
-         	android:layout_height="wrap_content"
-         	android:layout_alignRight="@android:id/text2"
-         	android:layout_below="@android:id/text2"
-         	android:layout_marginRight="5dp"
-         	android:layout_marginTop="15dp"
-         	android:background="@android:drawable/btn_default"
-         	android:text="@string/sawIt"
-         	android:width="120dp" /> 
+
          	
 
     </RelativeLayout>
@@ -79,3 +87,5 @@
 
 
 </FrameLayout>
+
+</ScrollView>
