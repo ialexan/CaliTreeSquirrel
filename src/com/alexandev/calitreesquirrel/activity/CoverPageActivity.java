@@ -1,6 +1,7 @@
 package com.alexandev.calitreesquirrel.activity;
 
 import com.alexandev.calitreesquirrel.R;
+import com.alexandev.calitreesquirrel.util.PreferencesCheck;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -15,9 +16,17 @@ public class CoverPageActivity extends Activity {
 		setContentView(R.layout.activity_cover_page);
 	}
 	 
-    public void sendToLoginPage( View view )
+    public void sendToNextPage( View view )
     {
-        Intent intent = new Intent( this, LoginActivity.class );
-        startActivity( intent );
+    	PreferencesCheck pref = new PreferencesCheck();
+    	
+		if ( pref.isFirst(this) ){
+			Intent intent = new Intent(this, InstructionsActivity.class);
+			startActivity(intent);
+		}
+		else {
+			Intent intent = new Intent( this, LoginActivity.class );
+	        startActivity( intent );
+		}
     }
 }

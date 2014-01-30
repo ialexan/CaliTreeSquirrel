@@ -9,9 +9,9 @@ public class PreferencesCheck {
 	private final String MY_PREFERENCES = "Squirrels_preferences";  
 
 	public boolean isFirst(Context context){
-		final SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, 0); 
+		SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE); 
 		
-		final boolean first = reader.getBoolean("isFirst", true);
+		boolean first = reader.getBoolean("isFirst", true);
 		if(first){
 			final SharedPreferences.Editor editor = reader.edit();
 			editor.putBoolean("isFirst", false); 
@@ -21,9 +21,9 @@ public class PreferencesCheck {
 	}
 
 	public void resetFirstTime(Context context){
-		final SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, 0); 
+		SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE); 
 
-		final SharedPreferences.Editor editor = reader.edit();
+		SharedPreferences.Editor editor = reader.edit();
 		editor.putBoolean("isFirst", true); 
 		editor.commit();
 	}

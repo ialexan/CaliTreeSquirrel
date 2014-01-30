@@ -32,32 +32,24 @@ public class ScreenSlideActivity extends FragmentActivity  {
 	private PagerAdapter mPagerAdapter;
 
 	PreferencesCheck pref = new PreferencesCheck();
-
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_screen_slide);
 
+		PreferencesCheck pref = new PreferencesCheck();
+		
 		if ( pref.isFirst(this) ){
-			Toast.makeText( getApplicationContext(),"First Time user!!!", Toast.LENGTH_LONG ).show();
+			Toast.makeText( getApplicationContext(),"Welcome", Toast.LENGTH_LONG ).show();
 			Intent intent = new Intent(this, CoverPageActivity.class);
 			startActivity(intent);
 		}
+//		else if ( (pref.getLoggedIn(this).get("username") == null) && (pref.getLoggedIn(this).get("password") == null) ){
+//			Intent intent = new Intent(this, LoginActivity.class);
+//			startActivity(intent);
+//		}
 		
-		if ( (pref.getLoggedIn(this).get("username") == null) && (pref.getLoggedIn(this).get("password") == null) ){
-			Intent intent = new Intent(this, LoginActivity.class);
-			startActivity(intent);
-		}
-
-		//		if ( PreferencesCheck.isLoggedIn(this) ){
-		//			Toast.makeText( getApplicationContext(),"Not Logged in", Toast.LENGTH_LONG ).show();
-		//			Intent intent = new Intent( this, LoginActivity.class );
-		//			startActivity(intent);
-		//		}
-
-		//		PreferencesCheck.resetFirstTime(this);
-
 		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
@@ -125,8 +117,12 @@ public class ScreenSlideActivity extends FragmentActivity  {
 
 		case R.id.action_info:    	
 			startActivity( new Intent( this, CoverPageActivity.class ) );
-			return true;     
-
+			return true; 
+			
+		case R.id.action_instructions:
+			startActivity( new Intent( this, InstructionsActivity.class ) );
+			return true;
+			
 		case R.id.action_signout:    
 			pref.setLoggedIn( this, null, null );
 			startActivity( new Intent( this, LoginActivity.class ) );

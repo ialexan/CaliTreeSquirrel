@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -198,7 +199,13 @@ public class PhotoIntentActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_photo);
+		
+		if( getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT )
+		{
+			setContentView(R.layout.activity_photo);
+		} else {
+			setContentView(R.layout.activity_photo_landscape);
+		}
 
 		mImageView = (ImageView) findViewById(R.id.imageView1);
 		mImageBitmap = null;
