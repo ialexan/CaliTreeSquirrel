@@ -45,9 +45,6 @@ public class LoginTask extends AsyncTask<String, String, String> {
 			JSONObject json = con.getStreamFromUrl( params[2],parameters );
 			
 			String message = (String) json.get("message");
-			
-//			Log.e( "log_tag", "This is parameters --" + params[0] + " - " + params[1] + " - " + params[2] + "- this is it.");
-//			Log.e( "log_tag", "This is the json -" + message + "- this is it.");
 
 			PreferencesCheck pref = new PreferencesCheck();
 			MD5 md5Password = new MD5( params[1] );
@@ -65,21 +62,18 @@ public class LoginTask extends AsyncTask<String, String, String> {
 
 	@Override
 	protected void onPostExecute( String str ) {
-
-//		Log.e( "log_tag", "This is str -" + str + "- this is it.");
 		
 		if ( str.equals("loggedIn")) {
 			Toast.makeText( currentActivity.getApplicationContext(), "Your Logged In", Toast.LENGTH_SHORT ).show(); 
 
 			Intent intent = new Intent( currentActivity, ScreenSlideActivity.class );
 			currentActivity.startActivity( intent );
+			currentActivity.finish();
 		}
 		else  
 			Toast.makeText( currentActivity.getApplicationContext(), "Username or Password invalid", Toast.LENGTH_SHORT ).show();
 
 	}
-
-
 
 }
 

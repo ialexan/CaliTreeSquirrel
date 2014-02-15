@@ -44,10 +44,6 @@ public class RegisterTask extends AsyncTask<String, String, String> {
 			HttpRemoteConnection con = new HttpRemoteConnection(); 
 			JSONObject json = con.getStreamFromUrl( params[5], parameters );
 
-//			Log.e( "log_tag", "This is the password -" + md5Password.getEncryptedValue()+ "- this is it.");
-//			Log.e( "log_tag", "This is the url -" + params[5] + "- this is it.");
-//			Log.e( "log_tag", "This is parameters -username-" + params[0] + " -password- " + params[1] + " - " + params[2] + " - " + params[3] + " - " + params[4] + "- this is it.");
-
 			String message = (String) json.get("user");
 			
 			PreferencesCheck pref = new PreferencesCheck();
@@ -71,13 +67,11 @@ public class RegisterTask extends AsyncTask<String, String, String> {
 
 			Intent intent = new Intent( currentActivity, ScreenSlideActivity.class );
 			currentActivity.startActivity( intent );
+			currentActivity.finish();
 		}
 		else  
 			Toast.makeText( currentActivity.getApplicationContext(), "Invalid Entry!", Toast.LENGTH_SHORT ).show();
-
 	}
-
-
 
 }
 

@@ -20,6 +20,7 @@ public class PreferencesCheck {
 		return first;
 	}
 
+	
 	public void resetFirstTime(Context context){
 		SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE); 
 
@@ -27,6 +28,7 @@ public class PreferencesCheck {
 		editor.putBoolean("isFirst", true); 
 		editor.commit();
 	}
+	
 	
 	public Bundle getLoggedIn(Context context){
 		SharedPreferences pref = context.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
@@ -38,6 +40,7 @@ public class PreferencesCheck {
 		return bundle;
 	}
 	
+	
 	public void setLoggedIn(Context context, String username, String password){
 		
 		SharedPreferences pref = context.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE);
@@ -47,6 +50,5 @@ public class PreferencesCheck {
 		editor.putString("password", password);
 		editor.commit();
 	}
-
 
 }

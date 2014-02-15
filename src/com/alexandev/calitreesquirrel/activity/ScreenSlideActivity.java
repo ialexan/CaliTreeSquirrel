@@ -10,14 +10,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 public class ScreenSlideActivity extends FragmentActivity  {
 
@@ -37,18 +35,7 @@ public class ScreenSlideActivity extends FragmentActivity  {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_screen_slide);
-
 		
-		if ( pref.isFirst(this) ){
-			Toast.makeText( getApplicationContext(),"Welcome", Toast.LENGTH_LONG ).show();
-			Intent intent = new Intent(this, CoverPageActivity.class);
-			startActivity(intent);
-			finish();
-		}
-//		else if ( (pref.getLoggedIn(this).get("username") == null) && (pref.getLoggedIn(this).get("password") == null) ){
-//			Intent intent = new Intent(this, LoginActivity.class);
-//			startActivity(intent);
-//		}
 		
 		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);

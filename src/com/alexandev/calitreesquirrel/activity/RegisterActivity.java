@@ -2,11 +2,9 @@ package com.alexandev.calitreesquirrel.activity;
 
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.task.RegisterTask;
-import com.alexandev.calitreesquirrel.util.PreferencesCheck;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
@@ -16,17 +14,6 @@ public class RegisterActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-	}
-	
-	@Override
-	protected void onResume(){
-		super.onResume();
-		
-		PreferencesCheck pref = new PreferencesCheck();
-		if ( (pref.getLoggedIn(this).get("username") != null) && (pref.getLoggedIn(this).get("password") != null) ){
-			Intent intent = new Intent( this, ScreenSlideActivity.class );
-			this.startActivity( intent );
-		}
 	}
 	
 	// Called when the user clicks the Register

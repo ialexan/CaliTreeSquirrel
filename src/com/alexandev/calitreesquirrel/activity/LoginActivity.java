@@ -23,20 +23,9 @@ public class LoginActivity extends Activity {
 		if ( (pref.getLoggedIn(this).get("username") != null) && (pref.getLoggedIn(this).get("password") != null) ){
 			Intent intent = new Intent( this, ScreenSlideActivity.class );
 			this.startActivity( intent );
+			finish();
 		}
-
-
-	}
-
-	@Override
-	protected void onResume(){
-		super.onResume();
 		
-		PreferencesCheck pref = new PreferencesCheck();
-		if ( (pref.getLoggedIn(this).get("username") != null) && (pref.getLoggedIn(this).get("password") != null) ){
-			Intent intent = new Intent( this, ScreenSlideActivity.class );
-			this.startActivity( intent );
-		}
 	}
 
 	// Called when the user clicks the Register 
