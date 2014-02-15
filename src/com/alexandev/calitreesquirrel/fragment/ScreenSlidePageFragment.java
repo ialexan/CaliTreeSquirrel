@@ -25,6 +25,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -186,7 +187,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 	
 		sawItButtonView.setOnClickListener( new View.OnClickListener() {
 			public void onClick(final View view) {
-
+				
 				locationManager.requestLocationUpdates(provider, 400, 1, locListener);
 				Location location = locationManager.getLastKnownLocation(provider);
 
@@ -212,7 +213,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 
 				sendToServer(date, latitude, longitude, name);
 				locationManager.removeUpdates(locListener);
-
+				
 			}
 		});
 
@@ -253,7 +254,8 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 		mBundle.putString( "longitude", longitude.toString());
 		mBundle.putInt( "species", species);
 
-		
+		Log.e( "log_tag", "************** You are here!! *******************");
+
 		
 		if ( locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
 			FragmentTransaction ft = getFragmentManager().beginTransaction();

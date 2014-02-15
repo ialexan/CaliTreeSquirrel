@@ -38,12 +38,12 @@ public class ScreenSlideActivity extends FragmentActivity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_screen_slide);
 
-		PreferencesCheck pref = new PreferencesCheck();
 		
 		if ( pref.isFirst(this) ){
 			Toast.makeText( getApplicationContext(),"Welcome", Toast.LENGTH_LONG ).show();
 			Intent intent = new Intent(this, CoverPageActivity.class);
 			startActivity(intent);
+			finish();
 		}
 //		else if ( (pref.getLoggedIn(this).get("username") == null) && (pref.getLoggedIn(this).get("password") == null) ){
 //			Intent intent = new Intent(this, LoginActivity.class);
@@ -81,16 +81,6 @@ public class ScreenSlideActivity extends FragmentActivity  {
 						: R.string.action_next);
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		return true;
-	}
-
-	@Override
-	protected void onResume(){
-		super.onResume();
-		
-		if ( (pref.getLoggedIn(this).get("username") == null) && (pref.getLoggedIn(this).get("password") == null) ){
-			Intent intent = new Intent(this, LoginActivity.class);
-			startActivity(intent);
-		}
 	}
 
 
