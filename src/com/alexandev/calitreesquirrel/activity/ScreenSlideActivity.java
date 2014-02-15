@@ -74,21 +74,12 @@ public class ScreenSlideActivity extends FragmentActivity  {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		/* case android.R.id.home:
-                // Navigate "up" the demo structure to the launchpad activity.
-                // See http://developer.android.com/design/patterns/navigation.html for more.
-                NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
-                return true;
-		 */
+		
 		case R.id.action_previous:
-			// Go to the previous step in the wizard. If there is no previous step,
-			// setCurrentItem will do nothing.
 			mPager.setCurrentItem(mPager.getCurrentItem() - 1);
 			return true;
 
 		case R.id.action_next:
-			// Advance to the next step in the wizard. If there is no next step, setCurrentItem
-			// will do nothing.
 			mPager.setCurrentItem(mPager.getCurrentItem() + 1);
 			return true;
 

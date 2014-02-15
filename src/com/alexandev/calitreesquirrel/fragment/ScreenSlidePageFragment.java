@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.alexandev.calitreesquirrel.R;
-import com.alexandev.calitreesquirrel.activity.PhotoIntentActivity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -16,7 +15,6 @@ import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -37,26 +35,19 @@ import android.widget.Toast;
 
 
 public class ScreenSlidePageFragment extends Fragment implements LocationListener{
-	/**
-	 * The argument key for the page number this fragment represents.
-	 */
+	
+	// The argument key for the page number this fragment represents.
 	public static final String ARG_PAGE = "page";
 
-	/**
-	 * The fragment's page number, which is set to the argument value for {@link #ARG_PAGE}.
-	 */
+	// The fragment's page number, which is set to the argument value for {@link #ARG_PAGE}.
 	private int mPageNumber;
 
 
-	/**
-	 * Hold a reference to the current animator, so that it can be canceled mid-way.
-	 */
+	// Hold a reference to the current animator, so that it can be canceled mid-way.
 	private Animator mCurrentAnimator;
 
-	/**
-	 * The system "short" animation time duration, in milliseconds. This duration is ideal for
-	 * subtle animations or animations that occur very frequently.
-	 */
+	// The system "short" animation time duration, in milliseconds. This duration is ideal for
+	// subtle animations or animations that occur very frequently.
 	private int mShortAnimationDuration;
 
 
@@ -65,9 +56,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 	private LocationManager locationManager;
 
 
-	/**
-	 * Factory method for this fragment class. Constructs a new fragment for the given page number.
-	 */
+	// Factory method for this fragment class. Constructs a new fragment for the given page number.
 	public static ScreenSlidePageFragment create(int pageNumber) {
 		ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
 		Bundle args = new Bundle();

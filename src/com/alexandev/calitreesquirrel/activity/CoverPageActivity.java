@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.view.View;
 
 public class CoverPageActivity extends Activity {
-
+	
+	PreferencesCheck pref = new PreferencesCheck();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -17,17 +19,15 @@ public class CoverPageActivity extends Activity {
 	}
 	 
     public void sendToNextPage( View view )
-    {
-    	PreferencesCheck pref = new PreferencesCheck();
+    {	
+    	Intent intent;
     	
-		if ( pref.isFirst(this) ){
-			Intent intent = new Intent(this, InstructionsActivity.class);
-			startActivity(intent);
-		}
-		else {
-			Intent intent = new Intent( this, LoginActivity.class );
-	        startActivity( intent );
-		}
+    	if ( pref.isFirst(this) )
+			intent = new Intent(this, InstructionsActivity.class);
+		else 
+			intent = new Intent( this, LoginActivity.class );
+	        
+		startActivity(intent);
 		finish();
     }
 }

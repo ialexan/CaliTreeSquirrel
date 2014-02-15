@@ -7,11 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -52,7 +48,6 @@ public class PhotoIntentActivity extends Activity {
 	private Boolean takePhoto = false;
 	private String imageName = "Nothing";
 
-	private static final int DIALOG_ALERT = 10;
 	private Activity currentActivity;
 
 	/* Photo album for this application */
@@ -201,11 +196,10 @@ public class PhotoIntentActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		if( getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT )
-		{
 			setContentView(R.layout.activity_photo);
-		} else {
+		else
 			setContentView(R.layout.activity_photo_landscape);
-		}
+	
 
 		mImageView = (ImageView) findViewById(R.id.imageView1);
 		mImageBitmap = null;
