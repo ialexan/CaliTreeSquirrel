@@ -5,14 +5,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 
 import com.alexandev.calitreesquirrel.R;
-import com.alexandev.calitreesquirrel.activity.PhotoIntentActivity;
 import com.alexandev.calitreesquirrel.task.SubmitPhotoTask;
 import com.alexandev.calitreesquirrel.util.NetworkDataConnection;
 
@@ -41,23 +39,7 @@ public class SquirrelsDialogFragment extends DialogFragment {
         builder.setMessage(message)  
                .setPositiveButton(positiveButtonMessage, new DialogInterface.OnClickListener() { 
                    public void onClick(DialogInterface dialog, int id) {
-                	   if (positiveButtonMessage.equals("Yes, Snap a Pic!")){
-                		    Intent intent = new Intent( currentActivity , PhotoIntentActivity.class );
-               				intent.putExtras(mBundle);
-               				startActivity( intent );
-                	   }
-                	   else if (positiveButtonMessage.equals("Yes")){
-                           startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                          // Toast.makeText( currentActivity.getApplicationContext(), "Click Saw It again!", Toast.LENGTH_SHORT ).show();
-                	   }
-                	   
-//           		   Toast.makeText( currentActivity.getApplicationContext(), "The answer is yes", Toast.LENGTH_SHORT ).show();
-//                	   Log.e( "log_tag", " The answer is Yes ");
-                   }
-               })
-               .setNegativeButton(negativeButtonMessage, new DialogInterface.OnClickListener() { 
-                   public void onClick(DialogInterface dialog, int id) {
-                	   if (negativeButtonMessage.equals("No, Just Send!")){
+                	   if (positiveButtonMessage.equals("Yes, Send")){
                 		   NetworkDataConnection networkData = new NetworkDataConnection(currentActivity);
                 		   
                 		   // Check network connectivity
@@ -67,20 +49,26 @@ public class SquirrelsDialogFragment extends DialogFragment {
                         		   
                         			Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_LONG ).show();
                 		   }
-                		   else { // No Network data Connection
-                			   Toast.makeText( currentActivity.getApplicationContext(), "Network Data Connection Unavailable!", Toast.LENGTH_LONG ).show();
+                		   else {
+                			   // Save it to send later on 
+                			   
                 		   }
                 		   
-                		   
                 	   }
-                	   else if (negativeButtonMessage.equals("No")){
-                           dialog.cancel();
+                	   else if (positiveButtonMessage.equals("Yes")){
+                           startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                          
                 	   }
                 	   
-//                	   Toast.makeText( currentActivity.getApplicationContext(), "The answer is no", Toast.LENGTH_SHORT ).show(); 
-//                	   Log.e( "log_tag", "This answer is No");
+                   }
+               })
+               .setNegativeButton(negativeButtonMessage, new DialogInterface.OnClickListener() { 
+                   public void onClick(DialogInterface dialog, int id) {
+                	   if (negativeButtonMessage.equals("No"))
+                           dialog.cancel();   
                    }
                });
+        
         // Create the AlertDialog object and return it
         return builder.create();
     }

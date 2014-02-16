@@ -50,7 +50,6 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 	// subtle animations or animations that occur very frequently.
 	private int mShortAnimationDuration;
 
-
 	private static Double latitude;
 	private static Double longitude;
 	private LocationManager locationManager;
@@ -68,12 +67,14 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 	public ScreenSlidePageFragment() {
 	}
 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		mPageNumber = getArguments().getInt(ARG_PAGE);
 	}
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -190,32 +191,23 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 			        dialogFragment.setNegativeButtonMessage("No");
 			        dialogFragment.show(ft, "dialog");
 		        }
-				
-				
+							
 				latitude =  location.getLatitude();
 				longitude = location.getLongitude();
-
-				
-				//Timestamp timestamp = new Timestamp(date.getTime());
-				
+		
 				String date =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SS").format(new Date());
 
 				sendToServer(date, latitude, longitude, name);
-				locationManager.removeUpdates(locListener);
-				
+				locationManager.removeUpdates(locListener);				
 			}
 		});
-
-
 
 		return rootView;
 	}
 
 
 
-	/**
-	 * Returns the page number represented by this fragment object.
-	 */
+	// Returns the page number represented by this fragment object.
 	public int getPageNumber() {
 		return mPageNumber;
 	}
@@ -243,8 +235,6 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 		mBundle.putString( "longitude", longitude.toString());
 		mBundle.putInt( "species", species);
 
-		Log.e( "log_tag", "************** You are here!! *******************");
-
 		
 		if ( locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -252,17 +242,16 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 	    
 			dialogFragment.setCurrentActivity(getActivity());
 			dialogFragment.setmBundle(mBundle);
-			dialogFragment.setMessage("Do you want to take a picture of the Squirrel?");
-			dialogFragment.setPositiveButtonMessage("Yes, Snap a Pic!");
-			dialogFragment.setNegativeButtonMessage("No, Just Send!");
+			dialogFragment.setMessage("Do you want to submit the sighting ?");
+			dialogFragment.setPositiveButtonMessage("Yes, Send");
+			dialogFragment.setNegativeButtonMessage("No");
 			dialogFragment.show(ft, "dialog");
 		}
 		
-//		SubmitTask submitTask = new SubmitTask();
-//		submitTask.execute( timestamp, latitude.toString(), longitude.toString(), species+"", this.getActivity().getString( R.string.sendURL ) );
 	
 	}
 
+	
 
 	@Override
 	public void onLocationChanged(Location location) {

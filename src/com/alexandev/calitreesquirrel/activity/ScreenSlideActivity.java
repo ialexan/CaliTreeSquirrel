@@ -83,6 +83,10 @@ public class ScreenSlideActivity extends FragmentActivity  {
 			mPager.setCurrentItem(mPager.getCurrentItem() + 1);
 			return true;
 
+		case R.id.action_send_saved_sightings:
+			// This is where you send the list of sightings
+			return true;
+			
 		case R.id.action_info:    	
 			startActivity( new Intent( this, CoverPageActivity.class ) );
 			return true; 
