@@ -13,7 +13,7 @@ import android.content.Intent;
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.task.SubmitPhotoTask;
 import com.alexandev.calitreesquirrel.util.NetworkDataConnection;
-
+import com.alexandev.calitreesquirrel.util.StorageSighting;;
 
 public class SquirrelsDialogFragment extends DialogFragment {
 	
@@ -51,7 +51,9 @@ public class SquirrelsDialogFragment extends DialogFragment {
                 		   }
                 		   else {
                 			   // Save it to send later on 
+                			   new StorageSighting().store(mBundle);
                 			   
+                			   Toast.makeText( currentActivity.getApplicationContext(), "No Network Connection, Sighting Saved to be Sent Later", Toast.LENGTH_LONG ).show();
                 		   }
                 		   
                 	   }

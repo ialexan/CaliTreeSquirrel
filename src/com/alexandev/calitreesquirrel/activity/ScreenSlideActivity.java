@@ -2,9 +2,15 @@
 
 package com.alexandev.calitreesquirrel.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.fragment.ScreenSlidePageFragment;
+import com.alexandev.calitreesquirrel.task.SubmitPhotoTask;
+import com.alexandev.calitreesquirrel.util.NetworkDataConnection;
 import com.alexandev.calitreesquirrel.util.PreferencesCheck;
+import com.alexandev.calitreesquirrel.util.StorageSighting;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -16,6 +22,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class ScreenSlideActivity extends FragmentActivity  {
 
@@ -85,6 +92,24 @@ public class ScreenSlideActivity extends FragmentActivity  {
 
 		case R.id.action_send_saved_sightings:
 			// This is where you send the list of sightings
+ 		   NetworkDataConnection networkData = new NetworkDataConnection(this);
+
+ 		   if (networkData.checkConnection()){
+ 			  List<Bundle> dataList = new StorageSighting().read(); 
+ 			  
+ 			  if (dataList.isEmpty())
+ 					Toast.makeText( this, "No Saved sightings, nothing is sent!", Toast.LENGTH_LONG ).show();
+ 			  else{
+ 				 for (Bundle mBundle : dataList)
+ 					 new SubmitPhotoTask(this).execute(mBundle.getString("timestamp"), mBundle.getString( "latitude"), mBundle.getString( "longitude"), 
+ 							 mBundle.getInt("species")+"", this.getString( R.string.sendURL ), "noPic" );
+ 				 
+ 				 
+ 				 Toast.makeText( this, "Sighting Sent!", Toast.LENGTH_LONG ).show();
+ 			  }
+          			
+  		   	 }
+		
 			return true;
 			
 		case R.id.action_info:    	
