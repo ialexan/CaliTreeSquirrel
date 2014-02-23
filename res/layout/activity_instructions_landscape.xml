@@ -1,23 +1,74 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:background="@drawable/instruction_landscape"
-    tools:context=".InstructionsActivity" >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/button_start"
-        android:layout_width="wrap_content"
+    <RelativeLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:drawable/btn_default"
-        android:onClick="sendToLoginPage"
-        android:text="@string/start"
-        android:width="250dp" 
-        android:height="50dp" />
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_marginTop="1dp"  
+        android:layout_marginLeft="-1dp" >
 
-</RelativeLayout>
+        <Button
+         	android:id="@+id/button_start"
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_alignRight="@android:id/text2"
+         	android:layout_marginRight="5dp"
+         	android:layout_marginTop="5dp"
+         	android:background="@android:drawable/btn_default"
+         	android:onClick="sendToLoginPage"
+            android:text="@string/start"
+         	android:width="160dp" /> 
+         	
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="-1dp"
+            android:contentDescription="@string/description"
+            android:src="@drawable/squirrel1_ins" />
+  
+        <TextView android:id="@android:id/text1"
+            style="?android:textAppearanceLarge"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_marginTop="5dp"
+         	android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/imageView1"
+            android:layout_below="@+id/button_start"
+            android:gravity="center|center_horizontal"
+            android:includeFontPadding="false"
+            android:scrollHorizontally="false" 
+            android:text="@string/name1"/> 
+        
+        <TextView android:id="@android:id/text2" 
+            style="?android:textAppearanceMedium"
+            android:lineSpacingMultiplier="1.2"
+            android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_below="@android:id/text1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/imageView1"
+            android:enabled="false"
+            android:includeFontPadding="false"
+            android:scrollHorizontally="false"
+         	android:width="320dp" 
+         	android:textColor="#5A5A5A" 
+         	android:autoLink="all"
+    		android:linksClickable="true"
+    		android:text="@string/desciption1"
+         	/>
+          
+    </RelativeLayout>
+ 
+</ScrollView>       
+        
+       

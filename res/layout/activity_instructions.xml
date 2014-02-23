@@ -1,23 +1,68 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/instruction"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".InstructionsActivity" >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/button_start"
-        android:layout_width="wrap_content"
+    <RelativeLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="292dip"
-        android:background="@android:drawable/btn_default"
-        android:onClick="sendToLoginPage"
-        android:text="@string/start"
-        android:width="320dp" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginTop="1dp"  >
 
-</RelativeLayout>
+        <ImageView
+         	android:id="@+id/imageView1"
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_alignParentTop="true"
+         	android:layout_centerHorizontal="true"
+         	android:layout_centerInParent="false"
+         	android:layout_marginTop="1dp"
+         	android:src="@drawable/squirrel1_ins" 
+         	android:contentDescription="@string/description"
+         	/>
+
+        <Button
+         	android:id="@+id/button_start"
+         	android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_below="@+id/imageView1"
+         	android:layout_marginTop="10dp"
+         	android:layout_centerHorizontal="true"
+         	android:background="@android:drawable/btn_default"
+         	android:text="@string/start"
+         	android:onClick="sendToLoginPage"
+         	android:width="320dp" /> 
+        
+        <TextView android:id="@android:id/text1"
+            style="?android:textAppearanceLarge"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+         	android:layout_height="wrap_content"
+         	android:layout_below="@+id/button_start"
+         	android:layout_centerHorizontal="true"
+         	android:layout_marginTop="5dp"
+         	android:gravity="center|center_horizontal"
+         	android:text="@string/name1"/>
+        
+        <TextView
+            android:id="@android:id/text2"
+            style="?android:textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@android:id/text1"
+            android:layout_marginTop="5dp"
+            android:includeFontPadding="false"
+            android:lineSpacingMultiplier="1.2"
+            android:scrollHorizontally="false"
+            android:textColor="#5A5A5A"
+            android:textSize="17sp"
+            android:width="320dp" 
+            android:autoLink="all"
+    		android:linksClickable="true"
+    		android:text="@string/desciption1"/>
+
+    </RelativeLayout>
+
+</ScrollView>
