@@ -2,6 +2,7 @@ package com.alexandev.calitreesquirrel.activity;
 
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.util.PreferencesCheck;
+import com.alexandev.calitreesquirrel.util.StorageSighting;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -22,8 +23,10 @@ public class CoverPageActivity extends Activity {
     {	
     	Intent intent;
     	
-    	if ( pref.isFirst(this) )
+    	if ( pref.isFirst(this) ){
 			intent = new Intent(this, InstructionsActivity.class);
+			new StorageSighting().create(this.getApplicationContext());;
+    	}
 		else 
 			intent = new Intent( this, LoginActivity.class );
 	        

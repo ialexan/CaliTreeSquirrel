@@ -47,19 +47,18 @@ public class SquirrelsDialogFragment extends DialogFragment {
                 			   new SubmitPhotoTask(currentActivity).execute(mBundle.getString("timestamp"), mBundle.getString( "latitude"), mBundle.getString( "longitude"), 
                         			   mBundle.getInt("species")+"", currentActivity.getString( R.string.sendURL ), "noPic" );
                         		   
-                        			Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_LONG ).show();
+                        		Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_LONG ).show();
                 		   }
                 		   else {
                 			   // Save it to send later on 
-                			   new StorageSighting().store(mBundle);
+                			   new StorageSighting().store( currentActivity.getApplicationContext(), mBundle);
                 			   
                 			   Toast.makeText( currentActivity.getApplicationContext(), "No Network Connection, Sighting Saved to be Sent Later", Toast.LENGTH_LONG ).show();
                 		   }
                 		   
                 	   }
                 	   else if (positiveButtonMessage.equals("Yes")){
-                           startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                          
+                           startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));                          
                 	   }
                 	   
                    }

@@ -3,6 +3,7 @@ package com.alexandev.calitreesquirrel.activity;
 
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.task.LoginTask;
+import com.alexandev.calitreesquirrel.util.NetworkDataConnection;
 import com.alexandev.calitreesquirrel.util.PreferencesCheck;
 
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class LoginActivity extends Activity {
@@ -42,8 +44,10 @@ public class LoginActivity extends Activity {
 
 		String password = ((EditText) findViewById( R.id.TextPassword )).getText().toString();
 
-		LoginTask loginTask = new LoginTask(this);
-		loginTask.execute( username, password, getString( R.string.loginURL ) );
+		if (new NetworkDataConnection(this).checkConnection())
+			new LoginTask(this).execute( username, password, getString( R.string.loginURL ) );
+		else
+			Toast.makeText( this, "No Network Connection!", Toast.LENGTH_LONG ).show(); 	
 	}
 
 }

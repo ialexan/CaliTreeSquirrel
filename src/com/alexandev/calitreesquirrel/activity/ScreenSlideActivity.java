@@ -2,7 +2,6 @@
 
 package com.alexandev.calitreesquirrel.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.alexandev.calitreesquirrel.R;
@@ -92,23 +91,23 @@ public class ScreenSlideActivity extends FragmentActivity  {
 
 		case R.id.action_send_saved_sightings:
 			// This is where you send the list of sightings
- 		   NetworkDataConnection networkData = new NetworkDataConnection(this);
 
- 		   if (networkData.checkConnection()){
- 			  List<Bundle> dataList = new StorageSighting().read(); 
+ 		   if (new NetworkDataConnection(this).checkConnection()){
+ 			  List<Bundle> dataList = new StorageSighting().read(this.getApplicationContext()); 
  			  
  			  if (dataList.isEmpty())
- 					Toast.makeText( this, "No Saved sightings, nothing is sent!", Toast.LENGTH_LONG ).show();
+ 					Toast.makeText( this, "No Saved Sightings, Nothing is Sent!", Toast.LENGTH_LONG ).show();
  			  else{
  				 for (Bundle mBundle : dataList)
  					 new SubmitPhotoTask(this).execute(mBundle.getString("timestamp"), mBundle.getString( "latitude"), mBundle.getString( "longitude"), 
  							 mBundle.getInt("species")+"", this.getString( R.string.sendURL ), "noPic" );
  				 
- 				 
  				 Toast.makeText( this, "Sighting Sent!", Toast.LENGTH_LONG ).show();
  			  }
           			
-  		   	 }
+  		   	} 
+ 		   	else 
+ 		   		Toast.makeText( this, "No Network Connection, Saved Sightings not sent!", Toast.LENGTH_LONG ).show();   		 
 		
 			return true;
 			

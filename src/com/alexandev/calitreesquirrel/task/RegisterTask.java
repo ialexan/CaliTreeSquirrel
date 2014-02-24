@@ -70,7 +70,7 @@ public class RegisterTask extends AsyncTask<String, String, String> {
 			currentActivity.finish();
 		}
 		else  
-			Toast.makeText( currentActivity.getApplicationContext(), "Invalid Entry!", Toast.LENGTH_SHORT ).show();
+			Toast.makeText( currentActivity.getApplicationContext(), "User already exists!", Toast.LENGTH_SHORT ).show();
 	}
 
 }

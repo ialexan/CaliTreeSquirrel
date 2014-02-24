@@ -2,11 +2,13 @@ package com.alexandev.calitreesquirrel.activity;
 
 import com.alexandev.calitreesquirrel.R;
 import com.alexandev.calitreesquirrel.task.RegisterTask;
+import com.alexandev.calitreesquirrel.util.NetworkDataConnection;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
 
@@ -25,8 +27,10 @@ public class RegisterActivity extends Activity {
 		String firstname = ((EditText) findViewById( R.id.firstname_input )).getText().toString();
 		String lastname = ((EditText) findViewById( R.id.lastname_input )).getText().toString();
 		
-		RegisterTask registerTask = new RegisterTask(this);
-		registerTask.execute( username, password, firstname, lastname, email, getString( R.string.registerURL ) );
+		if (new NetworkDataConnection(this).checkConnection())
+			new RegisterTask(this).execute( username, password, firstname, lastname, email, getString( R.string.registerURL ) );
+		else
+			Toast.makeText( this, "No Network Connection!", Toast.LENGTH_LONG ).show(); 
     }
 
 }

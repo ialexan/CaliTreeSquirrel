@@ -1,23 +1,26 @@
 package com.alexandev.calitreesquirrel.util;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
 
-public class StorageSighting extends Activity{
+public class StorageSighting{
 
 	private String FILENAME = "Squirrels_file";
 
-	public void store(Bundle mBundle){
+	public void store(Context context, Bundle mBundle){
 		try {
-			FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_APPEND);
+			FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_APPEND);
 
 			String data = mBundle.getString("timestamp")+","+mBundle.getString( "latitude")+","+mBundle.getString( "longitude")+","+mBundle.getInt("species")+"\n";
 
@@ -31,51 +34,53 @@ public class StorageSighting extends Activity{
 
 
 
-	public List<Bundle> read(){
+	public List<Bundle> read(Context context){
 
 		List<Bundle> dataList = new ArrayList<Bundle>();
 
 		try {
-			FileInputStream fis = openFileInput(FILENAME);
+			FileInputStream fis = context.openFileInput(FILENAME);
 
-			int content; 
-			String line = "";
-			
-			if (fis.available() <= 10)
+			if (fis.available() <= 5)
 				return dataList;
-			
-			while ((content = fis.read()) != -1) {
 
-				if ((char) content == '\n' ){
-					String[] data = line.split(",");
-					
-					Bundle mBundle = new Bundle();
-					mBundle.putString("timestamp", data[0]);
-					mBundle.putString( "latitude", data[1]);
-					mBundle.putString( "longitude", data[2]);
-					mBundle.putInt( "species", Integer.getInteger(data[3]));
-					
-					dataList.add(mBundle);
-					line = "";
-				}
-				else
-					line += (char) content;	
+			InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+			BufferedReader bufferedReader = new BufferedReader(isr);
+			String line;
+
+			while ((line = bufferedReader.readLine()) != null) {
+				String[] data = line.split(",");
+
+				Bundle mBundle = new Bundle();
+				mBundle.putString("timestamp", data[0]);
+				mBundle.putString( "latitude", data[1]);
+				mBundle.putString( "longitude", data[2]);
+				mBundle.putInt( "species", Integer.parseInt(data[3]));
+
+				dataList.add(mBundle);   
 			}
+
 
 			fis.read();
 			fis.close();
 
+		} catch (FileNotFoundException e) {
+			System.out.println("******************** File not found ********************");
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("******************** Encoding exeption ********************");
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("******************** IO exception ********************");
+		}catch (Exception e) {
+			System.out.println("******************** Exception ********************");
 		}
 
 		return dataList;
 	}
 
-	public void create(){
+	public void create(Context context){
 		String data = "";
 		try {
-			FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+			FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
 
 			fos.write(data.getBytes());
 			fos.close();
