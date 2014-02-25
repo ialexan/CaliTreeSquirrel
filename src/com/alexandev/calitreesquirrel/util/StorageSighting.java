@@ -60,7 +60,8 @@ public class StorageSighting{
 				dataList.add(mBundle);   
 			}
 
-
+			create(context);
+			
 			fis.read();
 			fis.close();
 
