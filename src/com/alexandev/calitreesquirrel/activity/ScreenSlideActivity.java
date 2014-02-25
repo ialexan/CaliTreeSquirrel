@@ -122,6 +122,7 @@ public class ScreenSlideActivity extends FragmentActivity  {
 		case R.id.action_signout:    
 			pref.setLoggedIn( this, null, null );
 			startActivity( new Intent( this, LoginActivity.class ) );
+			finish();
 			return true;     
 
 		}
