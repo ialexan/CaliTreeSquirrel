@@ -105,7 +105,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 					getString(R.string.desciption1));   
 			((ImageView) rootView.findViewById(R.id.imageView1)).setImageResource(
 					R.drawable.squirrel1);     			
-			((Button) rootView.findViewById(android.R.id.buttonPhototakenBy)).setText(
+			((Button) rootView.findViewById(R.id.buttonPhototakenBy)).setText(
 					getString(R.string.photoby1)); 
 			break;
 			
@@ -116,7 +116,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 					getString(R.string.desciption2));
 			((ImageView) rootView.findViewById(R.id.imageView1)).setImageResource(
 					R.drawable.squirrel2); 
-			((Button) rootView.findViewById(android.R.id.buttonPhototakenBy)).setText(
+			((Button) rootView.findViewById(R.id.buttonPhototakenBy)).setText(
 					getString(R.string.photoby2)); 
 			break;
 			
@@ -127,7 +127,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 					getString(R.string.desciption3));
 			((ImageView) rootView.findViewById(R.id.imageView1)).setImageResource(
 					R.drawable.squirrel3); 
-			((Button) rootView.findViewById(android.R.id.buttonPhototakenBy)).setText(
+			((Button) rootView.findViewById(R.id.buttonPhototakenBy)).setText(
 					getString(R.string.photoby3)); 
 			break;
 			
@@ -138,7 +138,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 					getString(R.string.desciption4));
 			((ImageView) rootView.findViewById(R.id.imageView1)).setImageResource(
 					R.drawable.squirrel4); 
-			((Button) rootView.findViewById(android.R.id.buttonPhototakenBy)).setText(
+			((Button) rootView.findViewById(R.id.buttonPhototakenBy)).setText(
 					getString(R.string.photoby4)); 
 			break;
 		case 5:
@@ -148,7 +148,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 					getString(R.string.desciption5));
 			((ImageView) rootView.findViewById(R.id.imageView1)).setImageResource(
 					R.drawable.squirrel5); 
-			((Button) rootView.findViewById(android.R.id.buttonPhototakenBy)).setText(
+			((Button) rootView.findViewById(R.id.buttonPhototakenBy)).setText(
 					getString(R.string.photoby5)); 
 		}
 
