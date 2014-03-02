@@ -11,6 +11,7 @@ import com.alexandev.calitreesquirrel.util.NetworkDataConnection;
 import com.alexandev.calitreesquirrel.util.PreferencesCheck;
 import com.alexandev.calitreesquirrel.util.StorageSighting;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
@@ -22,6 +23,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class ScreenSlideActivity extends FragmentActivity  {
@@ -128,9 +130,22 @@ public class ScreenSlideActivity extends FragmentActivity  {
 	
 	
 	public void sendToWebView( View view )
-	{
-		Toast.makeText( this, "Going to the Webview", Toast.LENGTH_LONG ).show(); 
-
+	{	
+		String url = getString(R.string.photoby1);
+				
+		if ( ((Button) view.findViewById(R.id.buttonPhototakenBy)).getText().equals(getString(R.string.photoby1)) )
+			url = getString(R.string.httplink1);
+		else if ( ((Button) view.findViewById(R.id.buttonPhototakenBy)).getText().equals(getString(R.string.photoby2)) )
+			url = getString(R.string.httplink2);
+		else if ( ((Button) view.findViewById(R.id.buttonPhototakenBy)).getText().equals(getString(R.string.photoby3)) )
+			url = getString(R.string.httplink3);
+		else if ( ((Button) view.findViewById(R.id.buttonPhototakenBy)).getText().equals(getString(R.string.photoby4)) )
+			url = getString(R.string.httplink4);
+		else if ( ((Button) view.findViewById(R.id.buttonPhototakenBy)).getText().equals(getString(R.string.photoby5)) )
+			url = getString(R.string.httplink5);
+		
+		Uri uri = Uri.parse( url );
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
 	}
 
 

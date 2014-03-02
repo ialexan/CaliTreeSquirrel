@@ -27,23 +27,24 @@
          	android:contentDescription="@string/description" />
 
     	<Button
-        	android:id="@+id/buttonPhototakenBy"
-        	style="?android:attr/borderlessButtonStyle"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:layout_below="@id/imageView1"
-        	android:layout_centerHorizontal="true"
-        	android:layout_marginTop="2dp"
-        	android:onClick="sendToWebView" 
-        	android:text="@string/photoby1"
-        	android:textSize="12sp" />
+    	    android:id="@+id/buttonPhototakenBy"
+    	    style="?android:attr/borderlessButtonStyle"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="20dp"
+    	    android:layout_below="@id/imageView1"
+    	    android:layout_centerHorizontal="true"
+    	    android:layout_marginTop="2dp"
+    	    android:onClick="sendToWebView"
+    	    android:text="@string/photoby1"
+    	    android:textColor="@color/textlink"
+    	    android:textSize="14sp" />
         
         <Button
          	android:id="@+id/button1"
          	android:layout_width="wrap_content"
          	android:layout_height="wrap_content"
          	android:layout_below="@+id/buttonPhototakenBy"
-         	android:layout_marginTop="10dp"
+         	android:layout_marginTop="15dp"
          	android:layout_centerHorizontal="true"
          	android:background="@android:drawable/btn_default"
          	android:text="@string/sawIt"
@@ -56,7 +57,7 @@
          	android:layout_height="wrap_content"
          	android:layout_below="@+id/button1"
          	android:layout_centerHorizontal="true"
-         	android:layout_marginTop="5dp"
+         	android:layout_marginTop="8dp"
          	android:gravity="center|center_horizontal" />
              
         <TextView
