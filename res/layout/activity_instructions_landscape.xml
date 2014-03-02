@@ -64,8 +64,7 @@
          	android:textColor="#5A5A5A" 
          	android:autoLink="all"
     		android:linksClickable="true"
-    		android:text="@string/desciption1"
-         	/>
+    		android:text="@string/instructions1" />
           
     </RelativeLayout>
  

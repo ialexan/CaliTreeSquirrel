@@ -27,7 +27,7 @@ public class LoginActivity extends Activity {
 			this.startActivity( intent );
 			finish();
 		}
-		
+
 	}
 
 	// Called when the user clicks the Register 
@@ -44,10 +44,17 @@ public class LoginActivity extends Activity {
 
 		String password = ((EditText) findViewById( R.id.TextPassword )).getText().toString();
 
-		if (new NetworkDataConnection(this).checkConnection())
-			new LoginTask(this).execute( username, password, getString( R.string.loginURL ) );
-		else
-			Toast.makeText( this, "No Network Connection!", Toast.LENGTH_LONG ).show(); 	
+		if ( username.isEmpty() )
+			Toast.makeText( this, "Username field is empty", Toast.LENGTH_SHORT ).show();
+		else if ( password.isEmpty() )
+			Toast.makeText( this, "Password field is empty", Toast.LENGTH_SHORT ).show();
+		else {
+			if (new NetworkDataConnection(this).checkConnection())
+				new LoginTask(this).execute( username, password, getString( R.string.loginURL ) );
+			else
+				Toast.makeText( this, "No Network Connection!", Toast.LENGTH_LONG ).show(); 
+		}
+
 	}
 
 }

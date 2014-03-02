@@ -5,13 +5,11 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
 
-
 <FrameLayout 
     android:id="@+id/content"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content" >
 
-    <!-- Dummy content. -->
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
@@ -29,7 +27,7 @@
          	android:background="@android:drawable/btn_default"
          	android:text="@string/sawIt"
          	android:width="240dp" /> 
-         	
+         	     	
         <ImageButton
          	android:id="@+id/imageView1"
          	android:layout_width="wrap_content"
@@ -37,8 +35,16 @@
          	android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="-1dp"  
-            android:contentDescription="@string/description"
-            />
+            android:contentDescription="@string/description" />
+        
+       	<Button
+        	android:id="@+id/buttonPhotoBy"
+        	style="?android:attr/borderlessButtonStyle"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@id/imageView1"
+        	android:layout_marginTop="2dp"
+        	android:textSize="12sp" />
   
         <TextView android:id="@android:id/text1"
             style="?android:textAppearanceLarge"
@@ -68,10 +74,8 @@
          	android:width="320dp" 
          	android:textColor="#5A5A5A" 
          	android:autoLink="all"
-    		android:linksClickable="true"
-         	/>
+    		android:linksClickable="true" />
           
-    
     </RelativeLayout>
 
     <!-- This initially-hidden ImageView will hold the expanded/zoomed version of the
@@ -84,12 +88,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible" 
-        android:contentDescription="@string/description"
-        />
+        android:contentDescription="@string/description" />
     
 </FrameLayout>
-
         
 </ScrollView>       
-        
-       

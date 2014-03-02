@@ -7,6 +7,10 @@
         android:showAsAction="ifRoom|withText"
         android:title="@string/action_previous"/>
     <item
+        android:id="@+id/action_next"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/action_next"/>
+    <item
         android:id="@+id/action_send_saved_sightings"
         android:orderInCategory="100"
         android:showAsAction="never"

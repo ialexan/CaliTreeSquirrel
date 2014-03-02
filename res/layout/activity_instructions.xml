@@ -61,7 +61,7 @@
             android:width="320dp" 
             android:autoLink="all"
     		android:linksClickable="true"
-    		android:text="@string/desciption1"/>
+    		android:text="@string/instructions1"/>
 
     </RelativeLayout>
 
