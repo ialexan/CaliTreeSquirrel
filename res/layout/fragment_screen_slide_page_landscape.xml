@@ -13,7 +13,7 @@
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="10dp"
         android:layout_marginTop="1dp"  
         android:layout_marginLeft="-1dp" >
 
@@ -33,7 +33,6 @@
          	android:layout_width="wrap_content"
          	android:layout_height="wrap_content"
          	android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="-1dp"  
             android:contentDescription="@string/description" />
         
@@ -43,7 +42,7 @@
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_below="@id/imageView1"
-        	android:layout_marginTop="2dp"
+        	android:layout_marginTop="0dp"
         	android:onClick="sendToWebView" 
         	android:text="@string/photoby1"
         	android:textColor="@color/textlink"
