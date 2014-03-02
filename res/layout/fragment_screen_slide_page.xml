@@ -27,20 +27,22 @@
          	android:contentDescription="@string/description" />
 
     	<Button
-        	android:id="@+id/buttonPhotoBy"
+        	android:id="@+id/buttonPhototakenBy"
         	style="?android:attr/borderlessButtonStyle"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_below="@id/imageView1"
         	android:layout_centerHorizontal="true"
         	android:layout_marginTop="2dp"
+        	android:onClick="sendToWebView" 
+        	android:text="@string/photoby1"
         	android:textSize="12sp" />
         
         <Button
          	android:id="@+id/button1"
          	android:layout_width="wrap_content"
          	android:layout_height="wrap_content"
-         	android:layout_below="@+id/buttonPhotoBy"
+         	android:layout_below="@+id/buttonPhototakenBy"
          	android:layout_marginTop="10dp"
          	android:layout_centerHorizontal="true"
          	android:background="@android:drawable/btn_default"

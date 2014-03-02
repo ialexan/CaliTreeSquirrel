@@ -38,12 +38,14 @@
             android:contentDescription="@string/description" />
         
        	<Button
-        	android:id="@+id/buttonPhotoBy"
+        	android:id="@+id/buttonPhototakenBy"
         	style="?android:attr/borderlessButtonStyle"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_below="@id/imageView1"
         	android:layout_marginTop="2dp"
+        	android:onClick="sendToWebView" 
+        	android:text="@string/photoby1"
         	android:textSize="12sp" />
   
         <TextView android:id="@android:id/text1"
