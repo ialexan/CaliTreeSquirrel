@@ -35,23 +35,12 @@
          	android:onClick="sendToLoginPage"
          	android:width="320dp" /> 
         
-        <TextView android:id="@android:id/text1"
-            style="?android:textAppearanceLarge"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-         	android:layout_height="wrap_content"
-         	android:layout_below="@+id/button_start"
-         	android:layout_centerHorizontal="true"
-         	android:layout_marginTop="5dp"
-         	android:gravity="center|center_horizontal"
-         	android:text="@string/name1"/>
-        
         <TextView
             android:id="@android:id/text2"
             style="?android:textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@android:id/text1"
+            android:layout_below="@+id/button_start"
             android:layout_marginTop="5dp"
             android:includeFontPadding="false"
             android:lineSpacingMultiplier="1.2"

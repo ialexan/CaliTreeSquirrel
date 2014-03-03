@@ -15,12 +15,14 @@ public class CoverPageActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		if ( !pref.isFirst(this) )
+			new Intent( this, LoginActivity.class );
+				
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cover_page);
 	}
 	 
-    public void sendToNextPage( View view )
-    {	
+    public void sendToNextPage( View view ){	
     	Intent intent;
     	
     	if ( pref.isFirst(this) ){
