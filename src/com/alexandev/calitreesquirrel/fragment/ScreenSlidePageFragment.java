@@ -32,8 +32,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
+import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationRequest;
 
-public class ScreenSlidePageFragment extends Fragment implements LocationListener{
+
+public class ScreenSlidePageFragment extends Fragment implements
+LocationListener,
+GooglePlayServicesClient.ConnectionCallbacks,
+GooglePlayServicesClient.OnConnectionFailedListener {
 	
 	// The argument key for the page number this fragment represents.
 	public static final String ARG_PAGE = "page";
@@ -52,6 +61,11 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 	private static Double latitude;
 	private static Double longitude;
 	private LocationManager locationManager;
+	
+	private LocationClient mLocationClient;
+	
+    // A request to connect to Location Services
+    private LocationRequest mLocationRequest;
 
 
 	// Factory method for this fragment class. Constructs a new fragment for the given page number.
@@ -60,6 +74,8 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 		Bundle args = new Bundle();
 		args.putInt(ARG_PAGE, pageNumber);
 		fragment.setArguments(args);
+		
+		
 		return fragment;
 	}
 
@@ -72,8 +88,79 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 		super.onCreate(savedInstanceState);
 
 		mPageNumber = getArguments().getInt(ARG_PAGE);
+		
+		
+        // Create a new global location parameters object
+        mLocationRequest = LocationRequest.create();
+
+        /*
+         * Set the update interval
+         */
+        mLocationRequest.setInterval(LocationUtils.UPDATE_INTERVAL_IN_MILLISECONDS);
+
+        // Use high accuracy
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        // Set the interval ceiling to one minute
+        mLocationRequest.setFastestInterval(LocationUtils.FAST_INTERVAL_CEILING_IN_MILLISECONDS);
+        
+		
+		mLocationClient = new LocationClient(this, this, this);
 	}
 	
+    /*
+     * Called when the Activity is no longer visible at all.
+     * Stop updates and disconnect.
+     */
+    @Override
+    public void onStop() {
+
+        // If the client is connected
+        if (mLocationClient.isConnected()) {
+            stopPeriodicUpdates();
+        }
+
+        // After disconnect() is called, the client is considered "dead".
+        mLocationClient.disconnect();
+
+        super.onStop();
+    }
+    /*
+     * Called when the Activity is restarted, even before it becomes visible.
+     */
+    @Override
+    public void onStart() {
+
+        super.onStart();
+
+        /*
+         * Connect the client. Don't re-start any requests here;
+         * instead, wait for onResume()
+         */
+        mLocationClient.connect();
+
+    }
+    
+    /**
+     * In response to a request to start updates, send a request
+     * to Location Services
+     */
+    private void startPeriodicUpdates() {
+
+        mLocationClient.requestLocationUpdates(mLocationRequest, this);
+    }
+
+    /**
+     * In response to a request to stop updates, send a request to
+     * Location Services
+     */
+    private void stopPeriodicUpdates() {
+        mLocationClient.removeLocationUpdates(this);
+    }
+    
+    
+    
+    
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -181,7 +268,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 		Criteria criteria = new Criteria();
 		final String provider = locationManager.getBestProvider(criteria, false);
 
-		final LocationListener locListener = this;
+		final LocationListener locListener = (LocationListener) this;
 		final String name = ((TextView) rootView.findViewById(android.R.id.text1)).getText().toString() ;
 
 		View sawItButtonView = (Button) rootView.findViewById(R.id.button1);
@@ -204,6 +291,9 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 			        dialogFragment.show(ft, "dialog");
 		        }
 							
+				
+				Location mCurrentLocation = mLocationClient.getLastLocation();
+
 				latitude =  location.getLatitude();
 				longitude = location.getLongitude();
 		
@@ -284,7 +374,7 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
+		// xx`
 
 	}
 
@@ -429,6 +519,24 @@ public class ScreenSlidePageFragment extends Fragment implements LocationListene
 				mCurrentAnimator = set;
 			}
 		});
+	}
+
+	@Override
+	public void onConnectionFailed(ConnectionResult arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConnected(Bundle arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDisconnected() {
+		// TODO Auto-generated method stub
+		
 	}
 
 
