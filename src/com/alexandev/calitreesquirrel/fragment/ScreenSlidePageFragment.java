@@ -40,7 +40,7 @@ import com.google.android.gms.location.LocationRequest;
 
 
 public class ScreenSlidePageFragment extends Fragment implements
-LocationListener,
+com.google.android.gms.location.LocationListener,
 GooglePlayServicesClient.ConnectionCallbacks,
 GooglePlayServicesClient.OnConnectionFailedListener {
 	
@@ -62,10 +62,10 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	private static Double longitude;
 	private LocationManager locationManager;
 	
-	private LocationClient mLocationClient;
-	
-    // A request to connect to Location Services
-    private LocationRequest mLocationRequest;
+	LocationClient mLocationClient;
+	LocationRequest locationRequest;
+	Boolean locationEnabled = true; 
+	Location location; 
 
 
 	// Factory method for this fragment class. Constructs a new fragment for the given page number.
@@ -89,79 +89,46 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 
 		mPageNumber = getArguments().getInt(ARG_PAGE);
 		
+		mLocationClient = new LocationClient(this.getActivity(), this, this);
 		
-        // Create a new global location parameters object
-        mLocationRequest = LocationRequest.create();
-
-        /*
-         * Set the update interval
-         */
-        mLocationRequest.setInterval(LocationUtils.UPDATE_INTERVAL_IN_MILLISECONDS);
-
-        // Use high accuracy
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        // Set the interval ceiling to one minute
-        mLocationRequest.setFastestInterval(LocationUtils.FAST_INTERVAL_CEILING_IN_MILLISECONDS);
-        
+		locationRequest = new LocationRequest();
 		
-		mLocationClient = new LocationClient(this, this, this);
+		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+		// Set the update interval to 5 seconds
+		locationRequest.setInterval(5);
+		// Set the fastest update interval to 1 second
+		locationRequest.setFastestInterval(1);
 	}
 	
-    /*
-     * Called when the Activity is no longer visible at all.
-     * Stop updates and disconnect.
-     */
-    @Override
-    public void onStop() {
 
-        // If the client is connected
-        if (mLocationClient.isConnected()) {
-            stopPeriodicUpdates();
-        }
-
-        // After disconnect() is called, the client is considered "dead".
-        mLocationClient.disconnect();
-
-        super.onStop();
-    }
-    /*
-     * Called when the Activity is restarted, even before it becomes visible.
-     */
-    @Override
-    public void onStart() {
-
-        super.onStart();
-
-        /*
-         * Connect the client. Don't re-start any requests here;
-         * instead, wait for onResume()
-         */
-        mLocationClient.connect();
-
-    }
-    
-    /**
-     * In response to a request to start updates, send a request
-     * to Location Services
-     */
-    private void startPeriodicUpdates() {
-
-        mLocationClient.requestLocationUpdates(mLocationRequest, this);
-    }
-
-    /**
-     * In response to a request to stop updates, send a request to
-     * Location Services
-     */
-    private void stopPeriodicUpdates() {
-        mLocationClient.removeLocationUpdates(this);
-    }
-    
-    
-    
-    
-
+	 @Override
+	 public void onConnected(Bundle bundle) {
+		 	location = mLocationClient.getLastLocation() ;
+		 
+		    if (location != null) {
+		        Toast.makeText(getActivity(), "Location: " + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+		    }
+		    else if (location == null && locationEnabled) {
+		        mLocationClient.requestLocationUpdates(locationRequest, this);
+		    }
+	 }
+	  
+	 @Override
+	 public void onLocationChanged(Location location) {
+		 mLocationClient.removeLocationUpdates(this);
+		 // Use the location here!!!
+	 }
+	 
+	 @Override
+	 public void onDisconnected() {
+		 //Toast.makeText(this, "Connected from Google Play Services.", Toast.LENGTH_SHORT).show();
+	 }
+	
+	 @Override	
+	 public void onConnectionFailed(ConnectionResult connectionResult) {
+		 // 
+	 }
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -277,11 +244,13 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		sawItButtonView.setOnClickListener( new View.OnClickListener() {
 			public void onClick(final View view) {
 				
-				locationManager.requestLocationUpdates(provider, 400, 1, locListener);
-				Location location = locationManager.getLastKnownLocation(provider);
+				//locationManager.requestLocationUpdates(provider, 400, 1, locListener);
+				//Location location = locationManager.getLastKnownLocation(provider);
 
 				// GPS check
-				if ( !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+				if ( !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) && !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) ) {
+					locationEnabled = false;
+					
 					FragmentTransaction ft = getFragmentManager().beginTransaction();
 				    SquirrelsDialogFragment dialogFragment = new SquirrelsDialogFragment();
 					dialogFragment.setCurrentActivity(getActivity());
@@ -289,10 +258,12 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 			        dialogFragment.setPositiveButtonMessage("Yes");
 			        dialogFragment.setNegativeButtonMessage("No");
 			        dialogFragment.show(ft, "dialog");
-		        }
+			        
+			        
+		        }else locationEnabled = true;
 							
 				
-				Location mCurrentLocation = mLocationClient.getLastLocation();
+				//Location mCurrentLocation = mLocationClient.getLastLocation();
 
 				latitude =  location.getLatitude();
 				longitude = location.getLongitude();
@@ -355,28 +326,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 
 	
 
-	@Override
-	public void onLocationChanged(Location location) {
 
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		Toast.makeText(this.getActivity(), "Disabled provider " + provider,
-				Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-		Toast.makeText(this.getActivity(), "Enabled new provider " + provider,
-				Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// xx`
-
-	}
 
 
 
@@ -519,24 +469,6 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 				mCurrentAnimator = set;
 			}
 		});
-	}
-
-	@Override
-	public void onConnectionFailed(ConnectionResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onConnected(Bundle arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDisconnected() {
-		// TODO Auto-generated method stub
-		
 	}
 
 
