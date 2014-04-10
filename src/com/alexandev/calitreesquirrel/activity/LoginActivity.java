@@ -15,7 +15,10 @@ import android.widget.Toast;
 
 
 public class LoginActivity extends Activity {
-
+	
+	String username = "";
+	String password = "";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,9 +43,9 @@ public class LoginActivity extends Activity {
 	// Called when the user clicks the Login 
 	public void checkLogin( View view )
 	{
-		String username = ((EditText) findViewById( R.id.TextUsername )).getText().toString();
+		username = ((EditText) findViewById( R.id.TextUsername )).getText().toString();
 
-		String password = ((EditText) findViewById( R.id.TextPassword )).getText().toString();
+		password = ((EditText) findViewById( R.id.TextPassword )).getText().toString();
 
 		if ( username.isEmpty() )
 			Toast.makeText( this, "Username field is empty", Toast.LENGTH_SHORT ).show();

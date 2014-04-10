@@ -12,6 +12,13 @@ import android.widget.Toast;
 
 public class RegisterActivity extends Activity {
 
+	String username = "";
+	String password = "";
+	String email = "";
+	String firstname = "";
+	String lastname = "";
+
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,11 +28,11 @@ public class RegisterActivity extends Activity {
 	// Called when the user clicks the Register
 	public void registerUser( View view )
 	{   
-		String username = ((EditText) findViewById( R.id.username_input )).getText().toString();
-		String password = ((EditText) findViewById( R.id.password_input )).getText().toString();
-		String email = ((EditText) findViewById( R.id.email_input )).getText().toString();
-		String firstname = ((EditText) findViewById( R.id.firstname_input )).getText().toString();
-		String lastname = ((EditText) findViewById( R.id.lastname_input )).getText().toString();
+		username = ((EditText) findViewById( R.id.username_input )).getText().toString();
+		password = ((EditText) findViewById( R.id.password_input )).getText().toString();
+		email = ((EditText) findViewById( R.id.email_input )).getText().toString();
+		firstname = ((EditText) findViewById( R.id.firstname_input )).getText().toString();
+		lastname = ((EditText) findViewById( R.id.lastname_input )).getText().toString();
 
 
 		if ( firstname.isEmpty() )

@@ -233,7 +233,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		// Define the criteria how to select the locatioin provider -> use
 		// default
 		Criteria criteria = new Criteria();
-		final String provider = locationManager.getBestProvider(criteria, false);
+		//final String provider = locationManager.getBestProvider(criteria, false);
 
 		final LocationListener locListener = (LocationListener) this;
 		final String name = ((TextView) rootView.findViewById(android.R.id.text1)).getText().toString() ;
