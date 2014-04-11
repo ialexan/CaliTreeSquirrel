@@ -18,9 +18,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,16 +32,16 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
-import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 
 
 public class ScreenSlidePageFragment extends Fragment implements
-com.google.android.gms.location.LocationListener,
+LocationListener,
 GooglePlayServicesClient.ConnectionCallbacks,
 GooglePlayServicesClient.OnConnectionFailedListener {
-	
+
 	// The argument key for the page number this fragment represents.
 	public static final String ARG_PAGE = "page";
 
@@ -61,7 +59,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 	private static Double latitude;
 	private static Double longitude;
 	private LocationManager locationManager;
-	
+
 	LocationClient mLocationClient;
 	LocationRequest locationRequest;
 	Boolean locationEnabled = true; 
@@ -74,61 +72,76 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		Bundle args = new Bundle();
 		args.putInt(ARG_PAGE, pageNumber);
 		fragment.setArguments(args);
-		
-		
+
+
 		return fragment;
 	}
 
-	public ScreenSlidePageFragment() {
-	}
 
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		mPageNumber = getArguments().getInt(ARG_PAGE);
-		
+
 		mLocationClient = new LocationClient(this.getActivity(), this, this);
-		
-		locationRequest = new LocationRequest();
-		
+
+		locationRequest = LocationRequest.create();
+
 		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 		// Set the update interval to 5 seconds
-		locationRequest.setInterval(5);
+		locationRequest.setInterval(50);
 		// Set the fastest update interval to 1 second
-		locationRequest.setFastestInterval(1);
+		locationRequest.setFastestInterval(10);
 	}
-	
 
-	 @Override
-	 public void onConnected(Bundle bundle) {
-		 	location = mLocationClient.getLastLocation() ;
-		 
-		    if (location != null) {
-		        Toast.makeText(getActivity(), "Location: " + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT).show();
-		    }
-		    else if (location == null && locationEnabled) {
-		        mLocationClient.requestLocationUpdates(locationRequest, this);
-		    }
-	 }
-	  
-	 @Override
-	 public void onLocationChanged(Location location) {
-		 mLocationClient.removeLocationUpdates(this);
-		 // Use the location here!!!
-	 }
-	 
-	 @Override
-	 public void onDisconnected() {
-		 //Toast.makeText(this, "Connected from Google Play Services.", Toast.LENGTH_SHORT).show();
-	 }
-	
-	 @Override	
-	 public void onConnectionFailed(ConnectionResult connectionResult) {
-		 // 
-	 }
-	
+
+	@Override
+	public void onConnected(Bundle bundle) {
+		location = mLocationClient.getLastLocation() ;
+
+		if (location != null) {
+			//Toast.makeText(getActivity(), "Location: " + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+		}
+		else if (location == null && locationEnabled) {
+			mLocationClient.requestLocationUpdates(locationRequest, (com.google.android.gms.location.LocationListener) this);
+		}
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		mLocationClient.removeLocationUpdates((com.google.android.gms.location.LocationListener) this);
+		// Use the location here!!!
+	}
+
+	@Override
+	public void onDisconnected() {
+		//Toast.makeText(this, "Disconnected from Google Play Services.", Toast.LENGTH_SHORT).show();
+	}
+
+	@Override	
+	public void onConnectionFailed(ConnectionResult connectionResult) {
+		//Toast.makeText(this, "Connected failed to Google Play Services.", Toast.LENGTH_SHORT).show(); 
+	}
+
+    @Override
+    public void onStart() {
+
+        super.onStart();
+        mLocationClient.connect();
+
+    }
+
+
+	@Override
+	public void onStop() {
+		// Disconnecting the client invalidates it.
+		mLocationClient.disconnect();
+		super.onStop();
+	}
+
+
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -161,7 +174,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 			((Button) rootView.findViewById(R.id.buttonPhototakenBy)).setText(
 					getString(R.string.photoby1)); 
 			break;
-			
+
 		case 2:
 			((TextView) rootView.findViewById(android.R.id.text1)).setText(
 					getString(R.string.name2));
@@ -172,7 +185,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 			((Button) rootView.findViewById(R.id.buttonPhototakenBy)).setText(
 					getString(R.string.photoby2)); 
 			break;
-			
+
 		case 3:
 			((TextView) rootView.findViewById(android.R.id.text1)).setText(
 					getString(R.string.name3));
@@ -183,7 +196,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 			((Button) rootView.findViewById(R.id.buttonPhototakenBy)).setText(
 					getString(R.string.photoby3)); 
 			break;
-			
+
 		case 4:
 			((TextView) rootView.findViewById(android.R.id.text1)).setText(
 					getString(R.string.name4));
@@ -232,46 +245,47 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		locationManager = (LocationManager) this.getActivity().getSystemService(Context.LOCATION_SERVICE);
 		// Define the criteria how to select the locatioin provider -> use
 		// default
-		Criteria criteria = new Criteria();
+		//Criteria criteria = new Criteria();
 		//final String provider = locationManager.getBestProvider(criteria, false);
 
 		final LocationListener locListener = (LocationListener) this;
 		final String name = ((TextView) rootView.findViewById(android.R.id.text1)).getText().toString() ;
 
 		View sawItButtonView = (Button) rootView.findViewById(R.id.button1);
-		
-	
+
+
 		sawItButtonView.setOnClickListener( new View.OnClickListener() {
 			public void onClick(final View view) {
-				
+
 				//locationManager.requestLocationUpdates(provider, 400, 1, locListener);
 				//Location location = locationManager.getLastKnownLocation(provider);
 
 				// GPS check
 				if ( !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) && !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) ) {
 					locationEnabled = false;
-					
-					FragmentTransaction ft = getFragmentManager().beginTransaction();
-				    SquirrelsDialogFragment dialogFragment = new SquirrelsDialogFragment();
-					dialogFragment.setCurrentActivity(getActivity());
-			        dialogFragment.setMessage("Your GPS seems to be disabled, do you want to enable it?");
-			        dialogFragment.setPositiveButtonMessage("Yes");
-			        dialogFragment.setNegativeButtonMessage("No");
-			        dialogFragment.show(ft, "dialog");
-			        
-			        
-		        }else locationEnabled = true;
-							
-				
-				//Location mCurrentLocation = mLocationClient.getLastLocation();
 
-				latitude =  location.getLatitude();
-				longitude = location.getLongitude();
-		
+					FragmentTransaction ft = getFragmentManager().beginTransaction();
+					SquirrelsDialogFragment dialogFragment = new SquirrelsDialogFragment();
+					dialogFragment.setCurrentActivity(getActivity());
+					dialogFragment.setMessage("Your GPS seems to be disabled, do you want to enable it?");
+					dialogFragment.setPositiveButtonMessage("Yes");
+					dialogFragment.setNegativeButtonMessage("No");
+					dialogFragment.show(ft, "dialog");
+
+
+				}else locationEnabled = true;
+
+
+				//Location mCurrentLocation = mLocationClient.getLastLocation();
+				Location currentLocation = mLocationClient.getLastLocation();
+
+				latitude =  currentLocation.getLatitude();
+				longitude = currentLocation.getLongitude();
+
 				String date =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SS").format(new Date());
 
 				sendToServer(date, latitude, longitude, name);
-				locationManager.removeUpdates(locListener);				
+				//locationManager.removeUpdates(locListener);				
 			}
 		});
 
@@ -288,7 +302,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 
 	// Sending the location coordinates, timestamp and squirrel type to the server
 	public void sendToServer(String timestamp, Double latitude, Double longitude, String squirrelName){
-		
+
 		int species = 0;
 
 		if ( squirrelName == getString(R.string.name1))
@@ -301,18 +315,18 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 			species = 4;
 		else if ( squirrelName == getString(R.string.name5))
 			species = 5;
-		
+
 		Bundle mBundle = new Bundle();
 		mBundle.putString("timestamp", timestamp);
 		mBundle.putString( "latitude", latitude.toString());
 		mBundle.putString( "longitude", longitude.toString());
 		mBundle.putInt( "species", species);
 
-		
+
 		if ( locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
 			FragmentTransaction ft = getFragmentManager().beginTransaction();
 			SquirrelsDialogFragment dialogFragment = new SquirrelsDialogFragment();
-	    
+
 			dialogFragment.setCurrentActivity(getActivity());
 			dialogFragment.setmBundle(mBundle);
 			dialogFragment.setMessage("Do you want to submit the sighting ?");
@@ -320,11 +334,11 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 			dialogFragment.setNegativeButtonMessage("No");
 			dialogFragment.show(ft, "dialog");
 		}
-		
-	
+
+
 	}
 
-	
+
 
 
 
@@ -470,6 +484,27 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 			}
 		});
 	}
+
+
+//	@Override
+//	public void onProviderDisabled(String arg0) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//
+//	@Override
+//	public void onProviderEnabled(String arg0) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//
+//	@Override
+//	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 
 
