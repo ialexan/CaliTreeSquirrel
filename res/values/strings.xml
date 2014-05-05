@@ -17,13 +17,13 @@
 
     <string name="name2">Douglas Squirrel</string>
     <string name="desciption2">Native Species - Fur on abdomen is light to dark orange, grayish-brown fur on sides and back, found in coniferous (pine) forests.</string>
-    <string name="photoby2">Photo by Phil Meyers</string>
+    <string name="photoby2">Photo by Phil Meyers - Information</string>
     <string name="httplink2">http://animaldiversity.ummz.umich.edu/accounts/Tamiasciurus_douglasii</string>
     
     
     <string name="name3">Eastern Gray Squirrel</string>
     <string name="desciption3">Introduced Species - White fur on the abdomen, light gray to rust colored fur on the sides and back, tail is light gray with rust coloration and hairs have white tips.</string>
-    <string name="photoby3">Photo by Tom Friedel</string>
+    <string name="photoby3">Photo by Tom Friedel - Information</string>
     <string name="httplink3">http://en.wikipedia.org/wiki/Eastern_gray_squirrel</string>
     
     
@@ -35,7 +35,7 @@
     
     <string name="name5">Melanistic Squirrel</string>
     <string name="desciption5">Introduced Species - Black fur all over the animal.  The melanistic color variant is present in populations of both the Eastern Gray Squirrel and the Eastern Fox Squirrel.</string>
-    <string name="photoby5">Photo by Ja Ga</string>    
+    <string name="photoby5">Photo by Ja Ga - Information</string>    
     <string name="httplink5">http://en.wikipedia.org/wiki/Black_squirrel</string> 
     
     
