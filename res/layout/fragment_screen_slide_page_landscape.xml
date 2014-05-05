@@ -36,9 +36,9 @@
             android:layout_marginLeft="-1dp"  
             android:contentDescription="@string/description" />
         
+        <!--  style="?android:attr/borderlessButtonStyle"-->
        	<Button
         	android:id="@+id/buttonPhototakenBy"
-        	style="?android:attr/borderlessButtonStyle"
         	android:layout_width="wrap_content"
         	android:layout_height="20dp"
         	android:layout_below="@id/imageView1"
