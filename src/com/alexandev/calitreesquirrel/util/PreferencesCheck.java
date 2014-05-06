@@ -8,11 +8,12 @@ public class PreferencesCheck {
 
 	private final String MY_PREFERENCES = "Squirrels_preferences";  
 
-	public boolean isFirst(Context context){
+	public boolean isFirst(Context context, String str){
 		SharedPreferences reader = context.getSharedPreferences(MY_PREFERENCES, Context.MODE_PRIVATE); 
 		
 		boolean first = reader.getBoolean("isFirst", true);
-		if(first){
+		
+		if(first && str.equals("second")){
 			final SharedPreferences.Editor editor = reader.edit();
 			editor.putBoolean("isFirst", false); 
 			editor.commit();

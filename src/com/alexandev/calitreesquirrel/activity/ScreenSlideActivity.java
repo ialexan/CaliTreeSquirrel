@@ -103,7 +103,10 @@ public class ScreenSlideActivity extends FragmentActivity  {
 			   		Toast.makeText( this, "No Network Connection, Saved Sightings not sent!", Toast.LENGTH_LONG ).show();
 			return true;
 		} else if (itemId == R.id.action_info) {
-			startActivity( new Intent( this, CoverPageActivity.class ) );
+			pref.resetFirstTime(this);
+			Intent intent = new Intent(this, CoverPageActivity.class);
+			intent.putExtra("activity", "slider");
+			startActivity( intent );
 			return true;
 		} else if (itemId == R.id.action_instructions) {
 			startActivity( new Intent( this, InstructionsActivity.class ) );

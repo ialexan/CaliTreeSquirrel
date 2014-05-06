@@ -15,24 +15,36 @@ public class CoverPageActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		if ( !pref.isFirst(this) )
-			new Intent( this, LoginActivity.class );
+		Bundle extras = getIntent().getExtras();
+		if (extras == null) {
+			if ( !pref.isFirst(this, "first") ) {
+				Intent intent = new Intent( this, LoginActivity.class );
+				startActivity(intent);
+				finish();
+			}
+		} 
+		else {
+			if ( !pref.isFirst(this, "second") ) { }
+		}
 				
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cover_page);
 	}
 	 
     public void sendToNextPage( View view ){	
-    	Intent intent;
     	
-    	if ( pref.isFirst(this) ){
-			intent = new Intent(this, InstructionsActivity.class);
-			new StorageSighting().create(this.getApplicationContext());;
+    	if ( pref.isFirst( this, "second" ) ){
+    		new StorageSighting().create( this.getApplicationContext() );
+    		Intent intent = new Intent( this, InstructionsActivity.class );
+			startActivity(intent);
+			finish();
     	}
-		else 
-			intent = new Intent( this, LoginActivity.class );
+		else {
+			Intent intent = new Intent( this, LoginActivity.class );
+			startActivity(intent);
+			finish();
+		}
 	        
-		startActivity(intent);
-		finish();
+		
     }
 }
