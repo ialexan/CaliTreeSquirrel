@@ -95,47 +95,62 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		locationRequest.setFastestInterval(10);
 	}
 
-
+//	@Override
+//	public void onResume() {
+//		super.onResume();
+//		mLocationClient.disconnect();
+//        mLocationClient.connect();
+//    }
+	
+	
 	@Override
 	public void onConnected(Bundle bundle) {
-		location = mLocationClient.getLastLocation() ;
+		 mLocationClient.requestLocationUpdates(locationRequest, (com.google.android.gms.location.LocationListener) this);
 
-		if (location != null) {
-			//Toast.makeText(getActivity(), "Location: " + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT).show();
-		}
-		else if (location == null && locationEnabled) {
-			mLocationClient.requestLocationUpdates(locationRequest, (com.google.android.gms.location.LocationListener) this);
-		}
+		//location = mLocationClient.getLastLocation() ;
+//
+//		if (location != null) {
+//			Toast.makeText(getActivity(), "Location: " + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+//		}
+//		else if (location == null && locationEnabled) {
+//			mLocationClient.requestLocationUpdates(locationRequest, (com.google.android.gms.location.LocationListener) this);
+//		}
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
-		mLocationClient.removeLocationUpdates((com.google.android.gms.location.LocationListener) this);
+		 mLocationClient.requestLocationUpdates(locationRequest, (com.google.android.gms.location.LocationListener) this);
+
+		//mLocationClient.removeLocationUpdates((com.google.android.gms.location.LocationListener) this);
 		// Use the location here!!!
 	}
 
 	@Override
 	public void onDisconnected() {
-		//Toast.makeText(this, "Disconnected from Google Play Services.", Toast.LENGTH_SHORT).show();
+		Toast.makeText( getActivity(), "Disconnected from Google Play Services.", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override	
 	public void onConnectionFailed(ConnectionResult connectionResult) {
-		//Toast.makeText(this, "Connected failed to Google Play Services.", Toast.LENGTH_SHORT).show(); 
+		Toast.makeText(getActivity(), "Connected failed to Google Play Services.", Toast.LENGTH_SHORT).show(); 
 	}
 
     @Override
     public void onStart() {
-
+    	if (mLocationClient.isConnected()) {
+			mLocationClient.removeLocationUpdates( (com.google.android.gms.location.LocationListener) this);
+        }
         super.onStart();
         mLocationClient.connect();
-
     }
 
 
 	@Override
 	public void onStop() {
 		// Disconnecting the client invalidates it.
+		if (mLocationClient.isConnected()) {
+			mLocationClient.removeLocationUpdates( (com.google.android.gms.location.LocationListener) this);
+        }
 		mLocationClient.disconnect();
 		super.onStop();
 	}
@@ -251,12 +266,16 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 		final LocationListener locListener = (LocationListener) this;
 		final String name = ((TextView) rootView.findViewById(android.R.id.text1)).getText().toString() ;
 
-		View sawItButtonView = (Button) rootView.findViewById(R.id.button1);
+		final Button btn = (Button) rootView.findViewById(R.id.button1);
 
-
-		sawItButtonView.setOnClickListener( new View.OnClickListener() {
+		
+		//mLocationClient.requestLocationUpdates(locationRequest, (com.google.android.gms.location.LocationListener) this);
+		// mLocationClient.connect();
+		
+		btn.setOnClickListener( new View.OnClickListener() {
 			public void onClick(final View view) {
-
+				btn.setEnabled(false);
+				
 				//locationManager.requestLocationUpdates(provider, 400, 1, locListener);
 				//Location location = locationManager.getLastKnownLocation(provider);
 
@@ -285,7 +304,8 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 				String date =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SS").format(new Date());
 
 				sendToServer(date, latitude, longitude, name);
-				//locationManager.removeUpdates(locListener);				
+				//locationManager.removeUpdates(locListener);	
+				btn.setEnabled(true);
 			}
 		});
 
