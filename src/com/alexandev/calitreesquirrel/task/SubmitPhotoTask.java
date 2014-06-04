@@ -24,7 +24,15 @@ public class SubmitPhotoTask extends AsyncTask<String, String, String> {
 
 	@Override
 	protected void onPreExecute() {
-		//Toast.makeText( myActivity.getApplicationContext(), "Submitting", Toast.LENGTH_SHORT ).show();
+		for (int i=0; i <= 2; i++)
+		{
+		      if ( i == 0 )
+		    	  Toast.makeText( currentActivity.getApplicationContext(), "Gathering Information on the Squirrel!", Toast.LENGTH_LONG ).show();
+		      else if ( i == 1 )
+		    	  Toast.makeText( currentActivity.getApplicationContext(), "Calculating Sighting location!", Toast.LENGTH_LONG ).show();
+		      else  
+		    	  Toast.makeText( currentActivity.getApplicationContext(), "Sending Sighting!", Toast.LENGTH_LONG ).show();
+		}
 	}
 
 	@Override
@@ -40,6 +48,12 @@ public class SubmitPhotoTask extends AsyncTask<String, String, String> {
 //			File file = new File(Environment.getExternalStoragePublicDirectory(
 //					Environment.DIRECTORY_DCIM).toString()
 //					+ "/Squirrels/"+params);
+			
+			try {
+			    Thread.sleep(10000);
+			} catch(InterruptedException ex) {
+				Toast.makeText( currentActivity.getApplicationContext(), "We appologize, Sighting could not be sent at the moment!", Toast.LENGTH_SHORT ).show();
+			}
 
 			MultipartEntity entity = new MultipartEntity();
 			entity.addPart("timestamp", new StringBody(params[0]));
@@ -58,12 +72,12 @@ public class SubmitPhotoTask extends AsyncTask<String, String, String> {
 			JSONObject json = con.sendImageToServer( params[4],entity );
              
 			Log.e( "log_tag", "This is the json -" + json.toString() + "- this is it.");
-		
 
+			
 			return json.toString();
 
 		} catch (Exception e) {
-			Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_SHORT ).show();
+			Toast.makeText( currentActivity.getApplicationContext(), "We appologize, Sighting could not be sent at the moment!", Toast.LENGTH_SHORT ).show();
 		}
 
 		
@@ -74,10 +88,11 @@ public class SubmitPhotoTask extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPostExecute( String str ) {
 			
-		//		if ( str != null)
-		//			Toast.makeText( myActivity.getApplicationContext(), "Success is (" + str + ")", Toast.LENGTH_LONG ).show(); 
-		//		else
-		//			Toast.makeText( myActivity.getApplicationContext(), "Failed!", Toast.LENGTH_LONG ).show();
+				if ( str != null)
+//					Toast.makeText( currentActivity.getApplicationContext(), "Success is (" + str + ")", Toast.LENGTH_LONG ).show(); 
+					Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_SHORT ).show();
+				else
+					Toast.makeText( currentActivity.getApplicationContext(), "We appologize, sighting could not be sent at the moment!", Toast.LENGTH_LONG ).show();
 
 	}
 
