@@ -92,7 +92,7 @@ public class SubmitPhotoTask extends AsyncTask<String, String, String> {
 //					Toast.makeText( currentActivity.getApplicationContext(), "Success is (" + str + ")", Toast.LENGTH_LONG ).show(); 
 					Toast.makeText( currentActivity.getApplicationContext(), "Sighting Sent!", Toast.LENGTH_SHORT ).show();
 				else
-					Toast.makeText( currentActivity.getApplicationContext(), "We appologize, sighting could not be sent at the moment!", Toast.LENGTH_LONG ).show();
+					Toast.makeText( currentActivity.getApplicationContext(), "We apologize, sighting could not be sent at the moment!", Toast.LENGTH_LONG ).show();
 
 	}
 
